@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Metal+Mania&display=swap');
+
+.font{
+  font-family: "Libre Baskerville", serif;
+}
+
+
+.topfont{
+  font-family: "Metal Mania", serif;
+  font-size: 1rem;
+  transform: scale(3.5);
+}
+.profileBox{
+  background-color: #f3ddc8;
+  
+  z-index: 0;
+}
+
+.myImages {
+  position: fixed; /* ทำให้รูปพื้นหลังคงที่ */
+  width: 100%; /* กำหนดความกว้างให้เท่ากับหน้าจอ */
+  height: 100%; /* กำหนดความสูงให้เท่ากับหน้าจอ */
+  background-color: antiquewhite; /* กำหนดภาพพื้นหลัง */
+  background-size: cover; /* ทำให้ภาพพื้นหลังปรับขนาดเพื่อเต็มจอ */
+  background-repeat: repeat; /* ไม่ให้ภาพพื้นหลังทำซ้ำ */
+  background-position: center; /* จัดตำแหน่งภาพพื้นหลังกลางหน้าจอ */
+  z-index: 0; /* ตั้งค่า z-index เป็นค่า 0 เพื่อให้รูปอยู่ข้างหลังข้อความ */
+}
+
+.topline {
+  position: static;
+  width: 100%;
+  height: 4em;
+  
+  background-color: saddlebrown;
+
+
+}
+
+.scroll{
+  height: 100%; /* กำหนดความสูงเท่ากับความสูงของหน้าจอ */
+  overflow-y: scroll; /* เปิดการใช้งานการเลื่อนแนวตั้งเมื่อเนื้อหามากเกิน */
+  box-sizing: border-box;
+  overflow-x: hidden;
+  z-index: 0 /* ตั้งค่า z-index เป็นค่าติดลบเพื่อให้สีพื้นหลังอยู่ข้างหลังสุด */;
+}
+
+.profile {
+  position: relative;
+  display: grid;
+  background-color: inherit;
+  height: 20em;
+  width: 100%;
+}
+
+.circle {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  background-color: darkgray;
+  height: 15em;
+  width: 15em;
+  border-radius: 100%;
+  background-image: url('/images/images.jpg');
+}
+
+.username {
+  position: absolute;
+  left: 10%;
+  top: 30%;
+  font-size: 1.5em;
+}
+
+.email {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  font-size: 1.5em;
+}
+
+
+.line {
+  position: static;
+  width: 90%;
+  height: 0.5em;
+  border-radius: 1em;
+  background-color: saddlebrown;
+
+  margin-left: 5%;
+}
+
+.char {
+  font-family: "Libre Baskerville", serif;
+  position: relative;
+  font-size: 1.5em;
+  top: 0.5em;
+
+}
+
+.button {
+  position: relative;
+  text-align: center;
+}
+
+.button {
+  font-family: "Libre Baskerville", serif;
+  font-size: 15px;
+  width: 17em;
+  height: 3em;
+  background-color: black;
+  color: white;
+  border-radius: 10em;
+}
+
+.button a {
+  color: white;
+  text-decoration: none;
+}
+
+
+
+
+.flexContainer {
+  display: flex;
+  flex-wrap: nowrap;
+ 
+}
+
+.flexContainer > div {
+
+  width: 70px;
+  margin-left: 120px;
+  text-align: left;
+  margin-top: 50px;
+  font-size: 20px;
+}
+
+.Clickme{
+  justify-items: center;
+  align-items: center;
+  font-family: "Libre Baskerville", serif;
+  font-size: 15px;
+  width: 7em;
+  height: 3em;
+  background-color: black;
+  color: white;
+  border-radius: 6em;
+  display: inline;
+}
+
+.Clickme button{
+  justify-items: center;
+  align-items: center;
+  font-family: "Libre Baskerville", serif;
+  font-size: 15px;
+  width: 7em;
+  height: 3em;
+  background-color: black;
+  color: white;
+  border-radius: 6em;
+  display: inline;
+}
+
+.yourModalClass {
+  padding: 30px;
+  width: 70vw;
+  position: absolute;
+  transform: translate(20%, 5%);
+  max-height: 80vh;  /* 80% of the viewport height */
+  overflow-y: auto; /* Display vertical scrollbar when content exceeds max-height */
+  background-color: rgb(187, 164, 133);
+  margin: auto; /* Center the modal on screen */
+}
+
+.modaldetails{
+  padding-top: 10px;
+  font-family: "Libre Baskerville", serif;
+  font-size: 18px;
+}
+
+.modaldetails p{
+  padding-top: 10px;
+
+}
+
+.centerTable {
+  margin: auto;
+  text-align: center;
+  padding: 100px;
+}
+
+
+.modaltable{
+ 
+  font-family: "Libre Baskerville", serif;
+  font-size: 18px;
+ 
+}
+
+.Deleteme{
+  justify-items: center;
+  align-items: center;
+  font-family: "Libre Baskerville", serif;
+  font-size: 15px;
+  width: 7em;
+  height: 3em;
+  background-color: rgb(214, 58, 58);
+  
+  border-radius: 6em;
+  display: inline;
+}
+
+.Deleteme button{
+  justify-items: center;
+  align-items: center;
+  font-family: "Libre Baskerville", serif;
+  font-size: 15px;
+  width: 7em;
+  height: 3em;
+  background-color: rgb(214, 58, 58);
+  border-radius: 6em;
+  display: inline;
+}
+
+.donotdeleteme{
+  justify-items: center;
+  align-items: center;
+  font-family: "Libre Baskerville", serif;
+  font-size: 15px;
+  width: 7em;
+  height: 3em;
+  background-color: rgb(145, 140, 140);
+  
+  border-radius: 6em;
+  display: inline;
+}
+
+.Addme{
+  justify-items: center;
+  align-items: center;
+  font-family: "Libre Baskerville", serif;
+  font-size: 16px;
+  width: 5em;
+  height: 2.5em;
+  background-color: rgb(35, 190, 21);
+ 
+  border-radius: 2em;
+  display: inline;
+}
+
+.Openme{
+  justify-items: center;
+  align-items: center;
+  font-family: "Libre Baskerville", serif;
+  font-size: 16px;
+  width: 6em;
+  height: 3em;
+  background-color: rgb(133, 74, 7);
+  color: white;
+  border-radius: 2em;
+  display: inline;
+}
+
+.flexinven{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+
+.content{
+  display: block;
+  border: 0.2rem solid black;
+  border-radius: 10px;
+  transform: translateY(-20px);
+  padding: 10px;
+  background-color:#bb9673;
+  margin-left: 5vw;
+}
+
+
