@@ -37,14 +37,14 @@ export default function RootLayout({
 					"min-h-screen bg-background font-sans antialiased",
 					fontSans.variable
 				)}
-			>
+			style={{backgroundImage: "url('images/village01.png')", backgroundRepeat: "no-repeat", backgroundSize:"100%"}}>
 				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 					<div className="relative flex flex-col h-screen">
 						<Navbar />
 						<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
 							{children}
 						</main>
-						<footer className="w-full flex items-center justify-center py-3">
+						<footer className="w-full flex items-center justify-center py-3" style={{userSelect: 'none'}}>
 							<p>ITAG Project Web-Game</p>
 						</footer>
 					</div>
