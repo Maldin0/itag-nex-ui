@@ -5,7 +5,7 @@ export default function LoginLayout({
 }) {
 	return (
 		<section className="">
-			<div className="inline-block max-w-lg text-center justify-center">
+			<div className=" text-center  ">
 				{children}
 			</div>
 		</section>

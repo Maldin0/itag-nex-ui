@@ -8,23 +8,8 @@
     transform: scale(3.5);
 }
 
-.myImages {
-    position: fixed; /* ทำให้รูปพื้นหลังคงที่ */
-    width: 100%; /* กำหนดความกว้างให้เท่ากับหน้าจอ */
-    height: 100%; /* กำหนดความสูงให้เท่ากับหน้าจอ */
-    background-image: url('../../public/images/village01.png'); /* กำหนดภาพพื้นหลัง */
-    background-size: cover; /* ทำให้ภาพพื้นหลังปรับขนาดเพื่อเต็มจอ */
-    background-repeat: repeat; /* ไม่ให้ภาพพื้นหลังทำซ้ำ */
-    background-position: center; /* จัดตำแหน่งภาพพื้นหลังกลางหน้าจอ */
-    z-index: 0; /* ตั้งค่า z-index เป็นค่า 0 เพื่อให้รูปอยู่ข้างหลังข้อความ */
-}
 
-.scroll{
-    height: 100%; /* กำหนดความสูงเท่ากับความสูงของหน้าจอ */
-    overflow-y: scroll; /* เปิดการใช้งานการเลื่อนแนวตั้งเมื่อเนื้อหามากเกิน */
-    box-sizing: border-box;
-    z-index: 0 /* ตั้งค่า z-index เป็นค่าติดลบเพื่อให้สีพื้นหลังอยู่ข้างหลังสุด */;
-}
+
 
 .topline {
     position: static;
@@ -47,17 +32,6 @@
     -webkit-border-radius: 35em;
 }
 
-.box h1 {
-    height: 10%;
-    font-size: 2.5em;
-    text-align: center;
-    margin: 15px 0;
-}
-
-
-
-
-
 .submit button {
     font-size: 15px;
     width: 17em;
@@ -69,7 +43,7 @@
 }
 
 .line {
-    position: relative;
+    
     width: 22em;
     border: 2px solid black;
     border-radius: 5px;
@@ -88,11 +62,11 @@
 }
 
 .submit a {
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
-.supButton a {
+.supButton {
     color: black;
     text-decoration: none;
 }
@@ -107,3 +81,6 @@
     border: 0.3em solid black;
     -webkit-border-radius: 35em;
 }
+
+
+
