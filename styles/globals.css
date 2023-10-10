@@ -12,10 +12,9 @@
 .box {
     background-color: white;
     -webkit-border-radius: 5em; 
-    @apply w-11/12 md:w-3/5 text-sm;
-    
 }
 
+<<<<<<< HEAD
 .img1{
     background-image: url('../images/village01.png'); 
     background-repeat: no-repeat;
@@ -28,3 +27,6 @@
     height:100%;
     width:100%;
 }
+=======
+
+>>>>>>> aa0a3bd9bf894ee35e903207512ceaab2fd30351

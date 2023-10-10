@@ -10,9 +10,10 @@ import {
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
+import { useSession, signIn, signOut } from "next-auth/react"
+
 
 import React from "react";
-import { Avatar, AvatarIcon } from "@nextui-org/react";
 
 export const Navbar = () => {
   return (
@@ -22,7 +23,7 @@ export const Navbar = () => {
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="/login" color="foreground">Login</Link>
+          <Link onClick={()=>{signIn("google")}} color="foreground">Login</Link>
         </NavbarItem>
         <NavbarItem>
           <Button as={Link} color="warning" href="#" variant="flat">
