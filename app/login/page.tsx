@@ -10,7 +10,7 @@ type Props = {};
 
 export default function Login({ }: Props) {
   return (
-    <div className={LoginStyle.myImages}>
+    
       <div className={LoginStyle.scroll}>
         <div className="container px-5 box p-5" style={{width:'50%'}} >
 
@@ -60,6 +60,6 @@ export default function Login({ }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }
