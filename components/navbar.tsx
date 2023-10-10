@@ -22,7 +22,7 @@ export const Navbar = () => {
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#" color="foreground">Login</Link>
+          <Link href="/login" color="foreground">Login</Link>
         </NavbarItem>
         <NavbarItem>
           <Button as={Link} color="warning" href="#" variant="flat">
