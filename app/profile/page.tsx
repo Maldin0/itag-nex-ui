@@ -31,10 +31,13 @@ type Props = {};
 
 export default function Profile({}: Props) {
   return (
-    <div className={`${profileStyle.profileBox} container flex flex-col items-center justify-center w-9/12 `}>
-        <div className={profileStyle.topfont}>
+    <div className={profileStyle.profileBox}>
+      <div className="profileBox" style={{minHeight:'120vh', marginTop:'-150px'}}>
+        <div>
+          <br /><br /><br /><br />
           dawdwadwa
         </div>
+      </div>
     </div>
    
   );

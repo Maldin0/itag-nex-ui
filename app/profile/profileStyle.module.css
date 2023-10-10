@@ -1,49 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700');
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Metal+Mania&display=swap');
 
-.font{
+.font {
   font-family: "Libre Baskerville", serif;
 }
 
 
-.topfont{
+.topfont {
   font-family: "Metal Mania", serif;
   font-size: 1rem;
   transform: scale(3.5);
 }
-.profileBox{
-  background-color: #f3ddc8;
-  
-  z-index: 0;
+
+.profileBox {
+  background-color: #dbb794;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
 }
 
 .myImages {
-  position: fixed; /* ทำให้รูปพื้นหลังคงที่ */
-  width: 100%; /* กำหนดความกว้างให้เท่ากับหน้าจอ */
-  height: 100%; /* กำหนดความสูงให้เท่ากับหน้าจอ */
-  background-color: antiquewhite; /* กำหนดภาพพื้นหลัง */
-  background-size: cover; /* ทำให้ภาพพื้นหลังปรับขนาดเพื่อเต็มจอ */
-  background-repeat: repeat; /* ไม่ให้ภาพพื้นหลังทำซ้ำ */
-  background-position: center; /* จัดตำแหน่งภาพพื้นหลังกลางหน้าจอ */
-  z-index: 0; /* ตั้งค่า z-index เป็นค่า 0 เพื่อให้รูปอยู่ข้างหลังข้อความ */
+  position: fixed;
+  /* ทำให้รูปพื้นหลังคงที่ */
+  width: 100%;
+  /* กำหนดความกว้างให้เท่ากับหน้าจอ */
+  height: 100%;
+  /* กำหนดความสูงให้เท่ากับหน้าจอ */
+  background-color: antiquewhite;
+  /* กำหนดภาพพื้นหลัง */
+  background-size: cover;
+  /* ทำให้ภาพพื้นหลังปรับขนาดเพื่อเต็มจอ */
+  background-repeat: repeat;
+  /* ไม่ให้ภาพพื้นหลังทำซ้ำ */
+  background-position: center;
+  /* จัดตำแหน่งภาพพื้นหลังกลางหน้าจอ */
+  z-index: 0;
+  /* ตั้งค่า z-index เป็นค่า 0 เพื่อให้รูปอยู่ข้างหลังข้อความ */
 }
 
 .topline {
   position: static;
   width: 100%;
   height: 4em;
-  
   background-color: saddlebrown;
-
-
 }
 
-.scroll{
-  height: 100%; /* กำหนดความสูงเท่ากับความสูงของหน้าจอ */
-  overflow-y: scroll; /* เปิดการใช้งานการเลื่อนแนวตั้งเมื่อเนื้อหามากเกิน */
+.scroll {
+  height: 100%;
+  /* กำหนดความสูงเท่ากับความสูงของหน้าจอ */
+  overflow-y: scroll;
+  /* เปิดการใช้งานการเลื่อนแนวตั้งเมื่อเนื้อหามากเกิน */
   box-sizing: border-box;
   overflow-x: hidden;
-  z-index: 0 /* ตั้งค่า z-index เป็นค่าติดลบเพื่อให้สีพื้นหลังอยู่ข้างหลังสุด */;
+  z-index: 0
+    /* ตั้งค่า z-index เป็นค่าติดลบเพื่อให้สีพื้นหลังอยู่ข้างหลังสุด */
+  ;
 }
 
 .profile {
@@ -124,10 +141,10 @@
 .flexContainer {
   display: flex;
   flex-wrap: nowrap;
- 
+
 }
 
-.flexContainer > div {
+.flexContainer>div {
 
   width: 70px;
   margin-left: 120px;
@@ -136,7 +153,7 @@
   font-size: 20px;
 }
 
-.Clickme{
+.Clickme {
   justify-items: center;
   align-items: center;
   font-family: "Libre Baskerville", serif;
@@ -149,7 +166,7 @@
   display: inline;
 }
 
-.Clickme button{
+.Clickme button {
   justify-items: center;
   align-items: center;
   font-family: "Libre Baskerville", serif;
@@ -167,19 +184,22 @@
   width: 70vw;
   position: absolute;
   transform: translate(20%, 5%);
-  max-height: 80vh;  /* 80% of the viewport height */
-  overflow-y: auto; /* Display vertical scrollbar when content exceeds max-height */
+  max-height: 80vh;
+  /* 80% of the viewport height */
+  overflow-y: auto;
+  /* Display vertical scrollbar when content exceeds max-height */
   background-color: rgb(187, 164, 133);
-  margin: auto; /* Center the modal on screen */
+  margin: auto;
+  /* Center the modal on screen */
 }
 
-.modaldetails{
+.modaldetails {
   padding-top: 10px;
   font-family: "Libre Baskerville", serif;
   font-size: 18px;
 }
 
-.modaldetails p{
+.modaldetails p {
   padding-top: 10px;
 
 }
@@ -191,14 +211,14 @@
 }
 
 
-.modaltable{
- 
+.modaltable {
+
   font-family: "Libre Baskerville", serif;
   font-size: 18px;
- 
+
 }
 
-.Deleteme{
+.Deleteme {
   justify-items: center;
   align-items: center;
   font-family: "Libre Baskerville", serif;
@@ -206,12 +226,12 @@
   width: 7em;
   height: 3em;
   background-color: rgb(214, 58, 58);
-  
+
   border-radius: 6em;
   display: inline;
 }
 
-.Deleteme button{
+.Deleteme button {
   justify-items: center;
   align-items: center;
   font-family: "Libre Baskerville", serif;
@@ -223,7 +243,7 @@
   display: inline;
 }
 
-.donotdeleteme{
+.donotdeleteme {
   justify-items: center;
   align-items: center;
   font-family: "Libre Baskerville", serif;
@@ -231,12 +251,12 @@
   width: 7em;
   height: 3em;
   background-color: rgb(145, 140, 140);
-  
+
   border-radius: 6em;
   display: inline;
 }
 
-.Addme{
+.Addme {
   justify-items: center;
   align-items: center;
   font-family: "Libre Baskerville", serif;
@@ -244,12 +264,12 @@
   width: 5em;
   height: 2.5em;
   background-color: rgb(35, 190, 21);
- 
+
   border-radius: 2em;
   display: inline;
 }
 
-.Openme{
+.Openme {
   justify-items: center;
   align-items: center;
   font-family: "Libre Baskerville", serif;
@@ -262,20 +282,18 @@
   display: inline;
 }
 
-.flexinven{
+.flexinven {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
 }
 
-.content{
+.content {
   display: block;
   border: 0.2rem solid black;
   border-radius: 10px;
   transform: translateY(-20px);
   padding: 10px;
-  background-color:#bb9673;
+  background-color: #bb9673;
   margin-left: 5vw;
 }
-
-
