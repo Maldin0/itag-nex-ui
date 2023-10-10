@@ -18,7 +18,7 @@ export const Navbar = () => {
   return (
     <NextUINavbar style={{background:'white'}}>
       <NavbarBrand>
-        <p className="font-bold text-inherit text-xl" style={{userSelect:'none'}}>ITAG</p>
+        <Link className="font-bold text-inherit text-xl" href="/" style={{userSelect:'none'}} >ITAG</Link>
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
