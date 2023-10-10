@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Metal+Mania&display=swap');
+
+.font{
+    font-family: "Libre Baskerville", serif;
+}
+
+.topfont{
+    font-family: "Metal Mania", serif;
+    font-size: 1rem;
+    transform: scale(3.5);
+}
+
+.myImages {
+    position: fixed; /* ทำให้รูปพื้นหลังคงที่ */
+    width: 100%; /* กำหนดความกว้างให้เท่ากับหน้าจอ */
+    height: 100%; /* กำหนดความสูงให้เท่ากับหน้าจอ */
+    background-image: url('../../public/images/village01.png'); /* กำหนดภาพพื้นหลัง */
+    background-size: cover; /* ทำให้ภาพพื้นหลังปรับขนาดเพื่อเต็มจอ */
+    background-repeat: repeat; /* ไม่ให้ภาพพื้นหลังทำซ้ำ */
+    background-position: center; /* จัดตำแหน่งภาพพื้นหลังกลางหน้าจอ */
+    z-index: 0; /* ตั้งค่า z-index เป็นค่า 0 เพื่อให้รูปอยู่ข้างหลังข้อความ */
+}
+
+.scroll{
+    height: 100%; /* กำหนดความสูงเท่ากับความสูงของหน้าจอ */
+    overflow-y: scroll; /* เปิดการใช้งานการเลื่อนแนวตั้งเมื่อเนื้อหามากเกิน */
+    box-sizing: border-box;
+    z-index: 0 /* ตั้งค่า z-index เป็นค่าติดลบเพื่อให้สีพื้นหลังอยู่ข้างหลังสุด */;
+}
+
+.topline {
+    position: static;
+    width: 100%;
+    height: 4.5em;
+    background-color: #783716;
+}
+
+.input, .textarea, .select {
+    border: 0.3rem solid black;
+    padding: 0.7em;
+    font-size: 1rem;
+    line-height: 1.2em;
+    width: 50%;
+    height: 40%;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 35em;
+    -webkit-border-radius: 35em;
+}
+
+.box h1 {
+    height: 10%;
+    font-size: 2.5em;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.box {
+    position: relative;
+    width: 48%;
+    height: 50%;
+    margin: auto;
+    top: 15%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5em;
+    background-color: white;
+}
+
+.box .inputBox {
+    width: 40%;
+    height: 10%;
+    text-align: center;
+    transform: translateY(10%);
+    line-height: 1em;
+    border: 0.3rem solid black;
+    -webkit-border-radius: 35em;
+    border-radius: 35em;
+}
+
+.box .submit {
+    text-align: center;
+    transform: translateY(180%);
+}
+
+.submit button {
+    font-size: 15px;
+    width: 17em;
+    height: 3em;
+    background-color: black;
+    color: white;
+    border-radius: 10em;
+}
+
+.line {
+    position: relative;
+    width: 22em;
+    border: 2px solid black;
+    border-radius: 5px;
+    top: 4.3em;
+}
+
+.supButton {
+    position: relative;
+    text-align: center;
+}
+
+.button {
+    font-size: 1em;
+    background: transparent;
+    border: transparent;
+}
+
+.submit a {
+    color: white;
+    text-decoration: none;
+}
+
+.supButton a {
+    color: black;
+    text-decoration: none;
+}
+
+
+.inputs{
+    padding: 10px;
+    width: 465px;
+    height: 50px;
+    margin-left: -13%;
+    transform: translateY(0%);
+    border: 0.3em solid black;
+    -webkit-border-radius: 35em;
+}
