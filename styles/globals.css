@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.font{
+    font-family: "Libre Baskerville", serif;
+    color:black;
+    font-size: 35px;
+}
+
+.box {
+    background-color: white;
+    -webkit-border-radius: 5em; 
+    @apply w-11/12 md:w-3/5 text-sm;
+    
+}
+
+
+
