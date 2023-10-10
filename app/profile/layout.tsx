@@ -1,11 +1,11 @@
-export default function LoginLayout({
+export default function ProfileLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
 	return (
 		<section className="">
-			<div className="text-center">
+			<div className="">
 				{children}
 			</div>
 		</section>

@@ -30,7 +30,8 @@ export const Navbar = () => {
           text: 'Welcome to ITAG Project Web-Game',
         })
         })
-      } catch (error) {
+      }
+ catch (error) {
       console.log(error);
     }
   }
