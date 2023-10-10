@@ -1,9 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700');
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Metal+Mania&display=swap');
 
-.font{
-    font-family: "Libre Baskerville", serif;
-}
+
+
 
 .topfont{
     font-family: "Metal Mania", serif;
@@ -57,33 +54,9 @@
     margin: 15px 0;
 }
 
-.box {
-    position: relative;
-    width: 48%;
-    height: 50%;
-    margin: auto;
-    top: 15%;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5em;
-    background-color: white;
-}
 
-.box .inputBox {
-    width: 40%;
-    height: 10%;
-    text-align: center;
-    transform: translateY(10%);
-    line-height: 1em;
-    border: 0.3rem solid black;
-    -webkit-border-radius: 35em;
-    border-radius: 35em;
-}
 
-.box .submit {
-    text-align: center;
-    transform: translateY(180%);
-}
+
 
 .submit button {
     font-size: 15px;
@@ -92,6 +65,7 @@
     background-color: black;
     color: white;
     border-radius: 10em;
+    @apply w-28 md:w-32;
 }
 
 .line {

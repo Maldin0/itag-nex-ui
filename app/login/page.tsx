@@ -4,63 +4,46 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import LoginStyle from "./LoginStyle.module.css";
-
+import {Input} from "@nextui-org/react";
 
 type Props = {};
 
 export default function Login({ }: Props) {
   return (
-    <div className={LoginStyle.myImages}>
+    
       <div className={LoginStyle.scroll}>
-        <div style={{ position: "relative", display: "flex" }}>
-          <div className={LoginStyle.topline}></div>
-          <h1
-            className={LoginStyle.topfont}
-            style={{
-              position: "absolute",
-              top: "20%",
-              left: "3%",
-              color: "white",
-            }}
-          >
-            <Link
-              href="/"
-              style={{ textDecoration: "none", color: "white" }}
-              className={LoginStyle.topfont}
-            >
-              ITAG
-            </Link>
-          </h1>
-        </div>
+        <div className="container px-5 box p-5" style={{width:'50%'}} >
 
-        <div
-          className={LoginStyle.box}
-          style={{ display: "flex", flexDirection: "column" }}
-        >
-          <div>
-            <h1 className={LoginStyle.font}>
-              IT ADVENTURERS
-              <br />
+          <div className="row justify-center mb-5">
+            <h1 className="font">
+              IT<p>&nbsp;</p> ADVENTURERS
+              <p>&nbsp;</p>
               GUILD
             </h1>
           </div>
 
-          <input
-            placeholder="E-mail/Username"
-            type="text"
-            className={LoginStyle.inputBox}></input>
+          <p>&nbsp;</p>
+          <div className="row" style={{width:'70%',paddingLeft:'30%'}}> 
+              <Input
+              placeholder="E-mail/Username"
+              type="text"
+              style={{}}></Input>
+          </div>
 
           <p>&nbsp;</p>
-
-          <input
+          <div  style={{width:'30%'}}>
+          <Input
             placeholder="Password"
             type="password"
             className={LoginStyle.inputBox}
-          ></input>
+          ></Input>
+          </div>
 
-          <div className={LoginStyle.submit} style={{ marginTop: "-5%" }}>
+          <p>&nbsp;</p>
+          <div className={LoginStyle.submit} >
+            
             <button type={"submit"} >
-              dwadaw
+              Login
             </button>
           </div>
 
@@ -77,6 +60,6 @@ export default function Login({ }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }
