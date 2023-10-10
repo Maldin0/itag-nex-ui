@@ -5,7 +5,7 @@ export default function LoginLayout({
 }) {
 	return (
 		<section className="">
-			<div className=" text-center  ">
+			<div className="text-center">
 				{children}
 			</div>
 		</section>

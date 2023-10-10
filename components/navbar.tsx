@@ -22,8 +22,8 @@ export const Navbar = () => {
         <Link className="font-bold text-inherit text-xl" href="/" style={{userSelect:'none'}} >ITAG</Link>
       </NavbarBrand>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link onClick={()=>{signIn("google")}} color="foreground">Login</Link>
+        <NavbarItem className="hidden lg:flex" style={{marginRight:'-10px'}}>
+          <Button as={Link} onClick={()=>{signIn("google")}} color className="text-white">Login</Button>
         </NavbarItem>
         <NavbarItem>
           <Button as={Link} color="warning" href="#" variant="flat">
