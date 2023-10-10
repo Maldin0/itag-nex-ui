@@ -19,20 +19,16 @@ import React from "react";
 export const Navbar = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
 
+  
+
   async function handleLogin() {
     try {
       setLoading(true);
       await signIn("google")
-      .then(()=>{
-        Swal.fire({
-          icon: 'success',
-          title: 'Login Success',
-          text: 'Welcome to ITAG Project Web-Game',
-        })
-        })
-      }
- catch (error) {
+    } catch (error) {
       console.log(error);
+    } finally {
+        setLoading(false);
     }
   }
 
@@ -45,7 +41,7 @@ export const Navbar = () => {
         <NavbarItem className="hidden lg:flex">
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="warning" onClick={async ()=>{await signIn("google")}} variant="flat">
+          <Button as={Link} color="warning" onClick={async ()=>{await handleLogin()}} variant="flat">
             login
           </Button>
         </NavbarItem>
