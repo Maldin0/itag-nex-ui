@@ -38,11 +38,9 @@ export const Navbar = () => {
         <Link className="font-bold text-inherit text-xl" href="/" style={{userSelect:'none'}} >ITAG</Link>
       </NavbarBrand>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-        </NavbarItem>
         <NavbarItem>
           <Button as={Link} color="warning" onClick={async ()=>{await handleLogin()}} variant="flat">
-            login
+            Login
           </Button>
         </NavbarItem>
         {/* <Avatar icon={<AvatarIcon/>}></Avatar> */}

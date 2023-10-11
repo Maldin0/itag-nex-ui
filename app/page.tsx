@@ -15,16 +15,27 @@ import "@/styles/globals.css";
 export default function Home() {
   return (
     <div className="contents">
-      <div style={{ marginTop: "600px" }}></div>
+      <div style={{ height: "600px" }}></div>
       <div
         style={{
-          background: "black",
+          background: "#080808",
           width: "100%",
-          height: "300px",
+          minHeight: "400px",
         }}
       >
         <br />
         <h1 className="text-center h-12 text-4xl">Featured Website</h1>
+        <div style={{justifyContent:'space-around', display:'flex'}}>
+          <div className="text-center"><Image src="../images/featured01.png"/><p>Design Character</p></div>
+          <div className="text-center"><Image src="../images/featured02.png"/><p>Start Journey</p></div>
+          <div className="text-center"><Image src="../images/featured03.png"/><p>Fullied Quest</p></div>
+
+        </div>
+        <div style={{justifyContent:'space-around', display:'flex'}}>
+          <div className="text-center"><Image src="../images/featured04.png"/><p>Role Play</p></div>
+          <div className="text-center"><Image src="../images/featured05.png"/><p>Rolling Dice!!</p></div>
+
+        </div>
       </div>
     </div>
   );
