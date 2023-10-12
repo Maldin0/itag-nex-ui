@@ -165,9 +165,6 @@ export default function Mycharacter({ }: Props) {
                 </Card>
               </Tab>
             </Tabs>
-<<<<<<< HEAD
-          </div>
-=======
           </div>  
           
           
@@ -175,7 +172,6 @@ export default function Mycharacter({ }: Props) {
           
           
           
->>>>>>> 4d2f6d6171f1ab1def66b608647b67b9d0bba231
           <div className=" text-center mt-40" >
             
             <Link href="createcharacter">
