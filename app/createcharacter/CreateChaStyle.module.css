@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Metal+Mania&display=swap');
+
+.font{
+  font-family: "Libre Baskerville", serif;
+}
+
+.topfont{
+  font-family: "Metal Mania", serif;
+  font-size: 1rem;
+  transform: scale(3.5);
+}
+
+.scroll{
+   /* กำหนดความสูงเท่ากับความสูงของหน้าจอ */
+  overflow-y: scroll; /* เปิดการใช้งานการเลื่อนแนวตั้งเมื่อเนื้อหามากเกิน */
+  box-sizing: border-box;
+  overflow-x: hidden;
+  z-index: 0 /* ตั้งค่า z-index เป็นค่าติดลบเพื่อให้สีพื้นหลังอยู่ข้างหลังสุด */;
+}
+
+
+.topline {
+  position: static;
+  width: 100%;
+  height: 4em;
+  
+  background-color: saddlebrown;
+
+
+}
+
+.box2 h1 {
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 2rem;
+  
+}
+
+.box {
+  position: absolute;
+  display: flex;
+  width: 70%;
+  height: 100%;
+  margin: auto;
+  top: 15%;
+  left: 14%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5em;
+  background-color: #AA7441;
+}
+
+
+
+.box .inputBox input {
+  background-color: transparent;
+}
+
+.box .submit{
+  text-align: center;
+  transform: translateY(180%);
+}
+
+.box2 {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 55%;
+  height: 80%;
+  margin: auto;
+  top: 10%;
+  left: 22%;
+  justify-content: top;
+  align-items: center;
+  border-radius: 10em;
+  background-color: wheat;
+}
+
+
+
+
+.profile {
+  
+  display: grid;
+  background-color: inherit;
+  height: 20em;
+  
+}
+
+.circle {
+  background-size: 100%;
+
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 25%;
+  left: 10%;
+
+  height: 15em;
+  width: 15em;
+  background-image: url('/images/images.jpg');
+}
+
+.username {
+  position: absolute;
+  left: 40%;
+  top: 30%;
+  font-size: 1.5em;
+}
+
+.email {
+  position: absolute;
+  left: 40%;
+  top: 50%;
+  font-size: 1.5em;
+}
+
+
+.line {
+  position: static;
+  width: 90%;
+  height: 0.3em;
+  border-radius: 1em;
+  background-color: black;
+
+  margin-left: 5%;
+}
+
+.char {
+  font-family: "Libre Baskerville", serif;
+  position: relative;
+  font-size: 1.5em;
+  top: 0.5em;
+  left: 13%;
+}
+
+.button {
+  position: relative;
+  text-align: center;
+}
+
+.button {
+  font-family: "Libre Baskerville", serif;
+  font-size: 15px;
+  width: 17em;
+  height: 3em;
+  background-color: black;
+  color: white;
+  border-radius: 30em;
+}
+
+.button a {
+  color: white;
+  text-decoration: none;
+}
+
+.input, .textarea, .select {
+  border: 0.3rem solid black;
+  padding: 0.7em;
+  font-size: 1rem;
+  line-height: 1.2em;
+  width: 20vw;
+  height: 1%;
+  background: transparent;
+  -webkit-appearance: none;
+  -webkit-border-radius: 35em;
+}
+
+.submit button {
+  font-size: 15px;
+  width: 17em;
+  height: 3em;
+  background-color: black;
+  color: white;
+  border-radius: 10em;
+}
+
+.supButton {
+  position: relative;
+  text-align: center;
+}
+
+  
+
+.supButton a {
+  color: white;
+  text-decoration: none;
+}
+
+.dropbtn {
+  background-color: transparent;
+  color: white;
+  padding: 1px;
+ 
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+.wrapper{
+  z-index: 10;
+  width: auto;
+  font-family: "Libre Baskerville", serif;
+}
+
+
+
+.selectbtn .options{
+  display: flex;
+  cursor: pointer;
+  align-items: left;
+  
+}
+.selectbtn{
+  border: 0.3rem solid black;
+  width: 400px;
+  height: 50px;
+  padding: 10px;
+  padding-right: 450px;
+  background-color: transparent;
+  -webkit-border-radius: 35em;
+  cursor: pointer;
+  justify-content: space-between;
+}
+
+.content{
+  display: block;
+  border: 0.2rem solid black;
+  border-radius: 10px;
+  transform: translateY(-60px);
+  padding: 10px;
+  background-color:#bb9673;
+  margin-left: 5vw;
+}
+
+.wrapper.active .content{
+  display: none;
+ 
+}
+
+
+
+.options li{
+  height: 80px;
+  padding: 0 13px;
+}
+
+.options li:hover{
+  background-color: rgb(243, 233, 214);
+}
+
+.box .inputBox {
+  width: 63%;
+  height: 7%;
+  padding-left: 10px;
+  text-align: left;
+  background-color: transparent;
+  transform: translateY(10%);
+  border: 0.3rem solid black;
+  -webkit-border-radius: 35em;
+}
