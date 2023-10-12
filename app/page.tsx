@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div className="contents">
       <div className="text-center" style={{ height: "600px", display:'flex', alignItems:'center', justifyContent:'center' }}>
-        <Button>Minecraft</Button>
+        <Button size="lg" radius="md" color="success" variant="shadow">Roll The Dice</Button>
       </div>
       <div className="select-none"
         style={{

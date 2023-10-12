@@ -14,8 +14,8 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import Swal from "sweetalert2";
 
 import React from "react";
-
 export const Navbar = () => {
+
   const [loading, setLoading] = React.useState<boolean>(false);
 
   async function handleLogin() {
@@ -30,7 +30,7 @@ export const Navbar = () => {
   }
 
   return (
-    <NextUINavbar style={{ background: "white" }}>
+    <NextUINavbar style={{ background: "white"}}>
       <NavbarBrand>
         <Link className="font-bold text-inherit text-xl select-none" href="/">
           ITAG
@@ -42,6 +42,7 @@ export const Navbar = () => {
             as={Link}
             color="warning"
             onClick={async () => {
+              document.body.style.cursor = "wait";
               await handleLogin();
             }}
             variant="flat"
