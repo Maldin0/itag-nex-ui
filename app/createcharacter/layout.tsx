@@ -5,7 +5,7 @@ export default function CreatecharacterLayout({
 }) {
 	return (
 		<section className="">
-			<div className="">
+			<div className="text-center">
 				{children}
 			</div>
 		</section>

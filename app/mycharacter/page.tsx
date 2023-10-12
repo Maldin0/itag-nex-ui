@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import "./profileStyle.css";
+import profileStyle from "./profileStyle.module.css";
 import line from "./images/line.png";
 import { log } from "util";
 import {
@@ -37,17 +37,24 @@ export default function Mycharacter({ }: Props) {
   
 
   return (
-    <div className="profileBox">
-      <div className="flex-items-center justify-center mx-auto " style={{ minHeight: '120vh', marginTop: '-150px' }}>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <div className={profileStyle.profileBox}>
+      <div className="container  flex-col items-center justify-center w-9/12 mx-auto " style={{ minHeight: '120vh', marginTop: '-150px' }}>
+        <br /><br /><br /><br /><br /><br />
 
         <div className="font justify-items-center" >
-          <div className="text-center" style={{ fontSize: '30px' }}>
-            <h1>Your Characters</h1>
+          <div className="text-left" style={{ fontSize: '60px',fontWeight:'bold',fontStyle:'italic'}}>
+            <h1>CHARACTERS</h1>
           </div>
-          <br />
-          <div className="text-center font" style={{ fontSize: '20px' }}>
-            <Tabs aria-label="Options" color="primary" radius="md" size="md">
+
+          
+          <div className={profileStyle.line}></div>
+          <div className=" ml-10 mt-5" style={{fontStyle:'italic'}}>
+            <h5>YOUR CHARACTER LIST</h5>
+          </div>
+          <br /><br /><br />
+
+          <div className="text-center " style={{ fontSize: '20px' }}>
+            <Tabs aria-label="Options" color="warning" radius="sm" size="lg">
               <Tab key="charactername" 
                 title={
                   <div className="flex items-center space-x-2">
@@ -100,8 +107,8 @@ export default function Mycharacter({ }: Props) {
                 <Card>
                   <CardBody>
                     <div style={{display:'flex',alignItems:'flex-start'}}>
-                      <div style={{flexShrink: '0'}}>(CharacterName):  &nbsp;&nbsp;</div>
-                      <div style={{flexGrow: '1',width:'0%',whiteSpace:'normal'}}>inventory &nbsp;&nbsp;<Button color="warning" variant="flat"  size="sm" onPress={onOpen}>OPEN INVENTORY</Button>
+                      <div style={{flexShrink: '0',marginTop:'0.5%'}}>(CharacterName):  &nbsp;&nbsp;</div>
+                      <div style={{flexGrow: '1',width:'0%',whiteSpace:'normal',textAlign:'right'}}> &nbsp;&nbsp;<Button color="warning" variant="flat"  size="lg" onPress={onOpen}>OPEN INVENTORY</Button>
                         <Modal backdrop="blur" size="5xl" isOpen={isOpen} onOpenChange={onOpenChange}>
                           <ModalContent>
                             {(onClose) => (
@@ -130,9 +137,9 @@ export default function Mycharacter({ }: Props) {
                 <Card>
                   <CardBody>
                     <div style={{display:'flex',alignItems:'flex-start'}}>
-                      <div style={{flexShrink: '0',marginTop:'0.3%'}}>(CharacterName):&nbsp;&nbsp;</div>
-                      <div><Button color="danger" variant="flat" onPress={onOpen}>Delete</Button>
-                        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                      <div style={{flexShrink: '0',marginTop:'0.5%'}}>(CharacterName):&nbsp;&nbsp;</div>
+                      <div style={{ flexGrow: 1, textAlign: 'right' }}><Button color="danger" variant="flat" size="lg" onPress={onOpen}>Delete Character</Button>
+                        <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
                           <ModalContent>
                             {(onClose) => (
                               <>
@@ -158,10 +165,21 @@ export default function Mycharacter({ }: Props) {
                 </Card>
               </Tab>
             </Tabs>
+<<<<<<< HEAD
           </div>
+=======
+          </div>  
+          
+          
+
+          
+          
+          
+>>>>>>> 4d2f6d6171f1ab1def66b608647b67b9d0bba231
           <div className=" text-center mt-40" >
+            
             <Link href="createcharacter">
-              <Button size="lg" radius="full" color="warning" variant="shadow" >Create Character</Button>
+              <Button  size="lg" radius='md' color='success' variant='solid' >Create Character</Button>
             </Link>
           </div>
         </div>
