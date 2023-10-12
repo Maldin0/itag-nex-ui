@@ -5,13 +5,15 @@ import LoginStyle from '../login/LoginStyle.module.css';
 
 import { useRouter } from 'next/navigation';
 
-
 import {
     Dropdown,
     DropdownTrigger,
     DropdownMenu,
     DropdownItem,
-    Button
+    Input,
+    Button,
+    Select,
+    SelectItem
 } from "@nextui-org/react";
 import Link from 'next/link';
 import { divider } from '@nextui-org/theme';
@@ -75,24 +77,81 @@ export default function Createcharacter({ }: Props) {
         generateRandomNumbers();
     }, []);
 
-
-
     return (
-        <div>
-            dwad
+        <div className={`${CreateChaStyle.box} container flex flex-col items-center justify-center mx-auto `}  >
+            <br /><br /><br /><br />
+            <div className={`${CreateChaStyle.box2} container flex flex-col items-center justify-center mx-auto `}>
+                <div>
+                    <h1 className="font">
+                        CREATE YOUR CHARACTER
+                    </h1>
+                </div>
+
+                <div className={CreateChaStyle.line}></div>
+
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <div className="row" style={{ width: '40%' }}>
+                    <Input size='lg' placeholder="Name" type="text"></Input>
+                </div>
+
+                <p>&nbsp;</p>
+                <div className="row" style={{ width: '40%' }}>
+                    <Select size='lg' label="Choose a Race" className="max-xs">
+                        {
+                            Object.entries(allRace).map(([label, value]) => (
+                                <SelectItem key={value} value={value}>
+                                    {label}
+                                </SelectItem>
+                            ))
+                        }
+                    </Select>
+                </div>
+
+                <p>&nbsp;</p>
+                <div className="row" style={{ width: '40%' }}>
+                    <Select size='lg' label="Choose a Class" className="max-xs">
+                        {
+                            Object.entries(allClass).map(([label, value]) => (
+                                <SelectItem key={value} value={value}>
+                                    {label}
+                                </SelectItem>
+                            ))
+                        }
+                    </Select>
+                </div>
+
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <div>
+                    <Button size='lg' color='warning' variant='faded' onClick={generateRandomNumbers} className={CreateChaStyle.inputBox} style={{}}><p>Random Stats: {randomNumbers.join(", ")}</p></Button>
+                    <p style={{ paddingTop: '10px', color: 'black' }}>
+                        dex: {randomNumbers[0]},
+                        &nbsp;wis: {randomNumbers[1]},
+                        &nbsp;int: {randomNumbers[2]},
+                        &nbsp;str: {randomNumbers[3]},
+                        &nbsp;cha: {randomNumbers[4]},
+                        &nbsp;con: {randomNumbers[5]}
+                    </p>
+                </div>
+                <p>&nbsp;</p>
+
+
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+            </div>
+            <br /><br />
+            
+            <div >
+                <Button size='lg' color="success" variant="solid">
+                    CREATE CHARACTER
+                </Button>
+            </div>
+            <br /><br /><br />
         </div>
     );
 
 }
 
 
-{/* <div style={{ paddingTop: '20px' }}></div>
-                        <button onClick={generateRandomNumbers} className={CreateChaStyle.inputBox} style={{}}><p>Random Stats: {randomNumbers.join(", ")}</p></button>
-                        <p style={{ paddingTop: '10px' }}>
-                            dex: {randomNumbers[0]},
-                            &nbsp;wis: {randomNumbers[1]},
-                            &nbsp;int: {randomNumbers[2]},
-                            &nbsp;str: {randomNumbers[3]},
-                            &nbsp;cha: {randomNumbers[4]},
-                            &nbsp;con: {randomNumbers[5]}
-                        </p> */}
+{/*  */ }

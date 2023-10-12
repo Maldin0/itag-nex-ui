@@ -12,7 +12,7 @@ type Props = {};
 export default function Login({ }: Props) {
   return (
     
-      <div className="container box flex flex-col items-center justify-center w-9/12 mx-auto " >
+      <div className=" box  " >
         <div>
           <h1 className="font">
             IT<p></p> ADVENTURERS

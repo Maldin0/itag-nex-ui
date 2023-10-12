@@ -10,8 +10,9 @@
 }
 
 .box {
-    background-color: white;
+    background-color: rgb(80, 13, 13);
     -webkit-border-radius: 5em; 
+    height: 100000%;
 }
 
 .img1{
