@@ -31,7 +31,7 @@ import { Tabs, Tab, Card, CardBody, Chip } from "@nextui-org/react";
 type Props = {};
 
 
-export default function Profile({ }: Props) {
+export default function Mycharacter({ }: Props) {
 
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   
@@ -159,6 +159,11 @@ export default function Profile({ }: Props) {
               </Tab>
             </Tabs>
           </div>  
+          <div className=" text-center mt-40" >
+            <Link href="createcharacter">
+              <Button size="lg" radius="full" color="warning" variant="shadow" >Create Character</Button>
+            </Link>
+          </div>
         </div>
 
         <br />

@@ -1,4 +1,4 @@
-export default function MycharacterLayout({
+export default function CreatecharacterLayout({
 	children,
 }: {
 	children: React.ReactNode;
