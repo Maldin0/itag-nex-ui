@@ -32,9 +32,11 @@ type Props = {};
 
 
 export default function Mycharacter({ }: Props) {
+  const {isOpen, onOpen, onClose} = useDisclosure();
+  const [isinvenOpen, setinvenOpen] = useState(false);
+  const [isdeleteOpen, setdeleteOpen] = useState(false);
 
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  
+
 
   return (
     <div className={profileStyle.profileBox}>
@@ -42,140 +44,97 @@ export default function Mycharacter({ }: Props) {
         <br /><br /><br /><br /><br /><br />
 
         <div className="font justify-items-center" >
-          <div className="text-left" style={{ fontSize: '60px',fontWeight:'bold',fontStyle:'italic'}}>
+          <div className="text-left" style={{ fontSize: '60px', fontWeight: 'bold', fontStyle: 'italic' }}>
             <h1>CHARACTERS</h1>
           </div>
 
-          
+
           <div className={profileStyle.line}></div>
-          <div className=" ml-10 mt-5" style={{fontStyle:'italic'}}>
+          <div className=" ml-10 mt-5" style={{ fontStyle: 'italic' }}>
             <h5>YOUR CHARACTER LIST</h5>
           </div>
           <br /><br /><br />
 
-          <div className="text-center " style={{ fontSize: '20px' }}>
-            <Tabs aria-label="Options" color="warning" radius="sm" size="lg">
-              <Tab key="charactername" 
-                title={
-                  <div className="flex items-center space-x-2">
-                    <span>CharacterName</span>
-                    <Chip size="sm" variant="faded">1</Chip>
-                  </div>
-                }
-              >
-                <Card>
-                  <CardBody>
-                    Name:
-                  </CardBody>
-                </Card>
-              </Tab>
-
-              <Tab key="classname" title="ClassName">
-                <Card>
-                  <CardBody>
-                    <div style={{display:'flex',alignItems:'flex-start'}}>
-                      <div style={{flexShrink: '0'}}>(CharacterName):  &nbsp;&nbsp;</div>
-                      <div style={{flexGrow: '1',width:'0%',whiteSpace:'normal'}}>Class</div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Tab>
-
-              <Tab key="racename" title="RaceName">
-                <Card>
-                  <CardBody>
-                    <div style={{display:'flex',alignItems:'flex-start'}}>
-                      <div style={{flexShrink: '0'}}>(CharacterName):  &nbsp;&nbsp;</div>
-                      <div style={{flexGrow: '1',width:'0%',whiteSpace:'normal'}}>Race</div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Tab>
-
-              <Tab key="details" title="Details">
-                <Card>
-                  <CardBody>
-                    <div style={{display:'flex',alignItems:'flex-start'}}>
-                      <div style={{flexShrink: '0'}}>(CharacterName):  &nbsp;&nbsp;</div>
-                      <div style={{flexGrow: '1',width:'0%',whiteSpace:'normal'}}>Details</div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Tab>
-
-              <Tab key="inventory" title="Inventory">
-                <Card>
-                  <CardBody>
-                    <div style={{display:'flex',alignItems:'flex-start'}}>
-                      <div style={{flexShrink: '0',marginTop:'0.5%'}}>(CharacterName):  &nbsp;&nbsp;</div>
-                      <div style={{flexGrow: '1',width:'0%',whiteSpace:'normal',textAlign:'right'}}> &nbsp;&nbsp;<Button color="warning" variant="flat"  size="lg" onPress={onOpen}>OPEN INVENTORY</Button>
-                        <Modal backdrop="blur" size="5xl" isOpen={isOpen} onOpenChange={onOpenChange}>
-                          <ModalContent>
-                            {(onClose) => (
-                              <>
-                                <ModalHeader className="flex flex-col gap-1">Ur inven bitches</ModalHeader>
-                                <ModalBody>
-                                  Items
-                                </ModalBody>
-                                <ModalFooter>
-                                  <Button color="danger" variant="light" onPress={onClose}>
-                                    Close
-                                  </Button>  
-                                </ModalFooter>
-                              </>
-                            )}
-                          </ModalContent>
-                        </Modal>
-                        
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Tab>
-
-              <Tab key="delete" title="Delete">
-                <Card>
-                  <CardBody>
-                    <div style={{display:'flex',alignItems:'flex-start'}}>
-                      <div style={{flexShrink: '0',marginTop:'0.5%'}}>(CharacterName):&nbsp;&nbsp;</div>
-                      <div style={{ flexGrow: 1, textAlign: 'right' }}><Button color="danger" variant="flat" size="lg" onPress={onOpen}>Delete Character</Button>
-                        <Modal backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
-                          <ModalContent>
-                            {(onClose) => (
-                              <>
-                                <ModalHeader className="flex flex-col gap-1 text-center">ARE YOU SURE TO DELETE YOUR CHARACTER ?</ModalHeader>
-                                <ModalBody>
-                                  <p></p>
-                                  <Button color="success" variant="light">Yes</Button>
-                                  <p></p>
-                                  <Button color="danger" variant="light" onPress={onClose}>No</Button>
-                                </ModalBody>
-                                <ModalFooter>
-                                  <Button color="danger" variant="light" onPress={onClose}>
-                                    Close
-                                  </Button>
-                                </ModalFooter>
-                              </>
-                            )}
-                          </ModalContent>
-                        </Modal>
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Tab>
-            </Tabs>
-          </div>  
-          
-          
-
-          
-          
-          
-          <div className=" text-center mt-40" >
+          <div className="text-left " style={{ fontSize: '30px' }}>
+            <h1 onClick={onOpen}>Blablabla</h1>
+            <Modal size="5xl" backdrop="blur" isOpen={isOpen}  onClose={onClose}  className="font" style={{ color: 'white', fontSize: '20px' }}
             
+            >
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <ModalHeader className="flex flex-col gap-1"><h1 style={{ fontSize: '30px' }}>(Character name)</h1></ModalHeader>
+                    <ModalBody>
+                      <div className=" p-3">
+                        <p><strong>Class: </strong></p>
+                        <p><strong>Race: </strong></p>
+                        <p><strong>Status: </strong></p>
+                        <p><strong>Backstory: </strong></p>
+                        <p><strong>Skills: </strong></p>
+                        <p><strong>Features: </strong></p>
+                        <p><strong>Spells: </strong></p>
+                        <p><strong>Traits: </strong></p>
+                      </div>
+                      <br />
+                      <p className=" text-center"><Button color="warning" variant="flat" onPress={() => setinvenOpen(true)}>OPEN INVENTORY</Button></p>
+                      <Modal isOpen={isinvenOpen} >
+                        <ModalContent>
+                          {(oninvenClose) => (
+                            <>
+                              <ModalHeader className="flex flex-col gap-1">YOUR ITEMS</ModalHeader>
+                              <ModalBody>
+                                  items
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button color="danger"  onPress={() => setinvenOpen(false)}>
+                                  Close
+                                </Button>
+                              </ModalFooter>
+                            </>
+                          )}
+                        </ModalContent>
+                      </Modal>
+                      
+                      <p className=" text-center"><Button color="danger" variant="flat" onPress={() => setdeleteOpen(true)}>DELETE CHARACTER</Button></p>
+                      <Modal isOpen={isdeleteOpen} >
+                        <ModalContent>
+                          {(ondeleteClose) => (
+                            <>
+                              <ModalHeader className="flex flex-col gap-1">ARE YOU SURE TO DELETE YOUR CHARACTER ?</ModalHeader>
+                              <ModalBody>
+                                  <Button color="success" variant="light">YES</Button>
+                                  <Button color="danger" variant="light" onPress={() => setdeleteOpen(false)}>NO</Button>
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button color="danger" onPress={() => setdeleteOpen(false)}>
+                                  Close
+                                </Button>
+                              </ModalFooter>
+                            </>
+                          )}
+                        </ModalContent>
+                      </Modal>
+                    </ModalBody>
+                    <ModalFooter>
+                      <Button color="danger" onPress={onClose}>
+                        Close
+                      </Button>
+                    </ModalFooter>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
+          </div>
+
+
+
+
+
+
+          <div className=" text-center mt-40" >
+
             <Link href="createcharacter">
-              <Button  size="lg" radius='md' color='success' variant='solid' >Create Character</Button>
+              <Button size="lg" radius='md' color='success' variant='solid' >Create Character</Button>
             </Link>
           </div>
         </div>
