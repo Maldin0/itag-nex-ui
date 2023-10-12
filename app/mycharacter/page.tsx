@@ -30,88 +30,145 @@ import { Tabs, Tab, Card, CardBody, Chip } from "@nextui-org/react";
 
 type Props = {};
 
+export default function Mycharacter({}: Props) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
-export default function Mycharacter({ }: Props) {
-  const {isOpen, onOpen, onClose} = useDisclosure();
   const [isinvenOpen, setinvenOpen] = useState(false);
   const [isdeleteOpen, setdeleteOpen] = useState(false);
 
-
-
   return (
-    <div className={profileStyle.profileBox}>
-      <div className="container  flex-col items-center justify-center w-9/12 mx-auto " style={{ minHeight: '120vh', marginTop: '-150px' }}>
-        <br /><br /><br /><br /><br /><br />
+    <div
+      className="container  flex-col items-center justify-center w-9/12 mx-auto "
+      style={{ minHeight: "120vh", marginTop: "-150px" }}
+    >
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <div className="font justify-items-center">
+        <p className="text-6xl">Characters</p>
+        <div className={profileStyle.line}></div>
 
-        <div className="font justify-items-center" >
-          <div className="text-left" style={{ fontSize: '60px', fontWeight: 'bold', fontStyle: 'italic' }}>
-            <h1>CHARACTERS</h1>
-          </div>
-
-
-          <div className={profileStyle.line}></div>
-          <div className=" ml-10 mt-5" style={{ fontStyle: 'italic' }}>
-            <h5>YOUR CHARACTER LIST</h5>
-          </div>
-          <br /><br /><br />
-
-          <div className="text-left " style={{ fontSize: '30px' }}>
+        <div className=" ml-10 mt-5" style={{ fontStyle: "italic" }}>
+          <h5>YOUR CHARACTER LIST</h5>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div className="text-left " style={{ fontSize: "30px" }}>
             <h1 onClick={onOpen}>Blablabla</h1>
-            <Modal size="5xl" backdrop="blur" isOpen={isOpen}  onClose={onClose}  className="font" style={{ color: 'white', fontSize: '20px' }}
-            
+            <Modal
+              size="5xl"
+              backdrop="blur"
+              isOpen={isOpen}
+              onClose={onClose}
+              className="font"
+              style={{ color: "white", fontSize: "20px" }}
             >
               <ModalContent>
                 {(onClose) => (
                   <>
-                    <ModalHeader className="flex flex-col gap-1"><h1 style={{ fontSize: '30px' }}>(Character name)</h1></ModalHeader>
+                    <ModalHeader className="flex flex-col gap-1">
+                      <h1 style={{ fontSize: "30px" }}>(Character name)</h1>
+                    </ModalHeader>
                     <ModalBody>
                       <div className=" p-3">
-                        <p><strong>Class: </strong></p>
-                        <p><strong>Race: </strong></p>
-                        <p><strong>Status: </strong></p>
-                        <p><strong>Backstory: </strong></p>
-                        <p><strong>Skills: </strong></p>
-                        <p><strong>Features: </strong></p>
-                        <p><strong>Spells: </strong></p>
-                        <p><strong>Traits: </strong></p>
+                        <p>
+                          <strong>Class: </strong>
+                        </p>
+                        <p>
+                          <strong>Race: </strong>
+                        </p>
+                        <p>
+                          <strong>Status: </strong>
+                        </p>
+                        <p>
+                          <strong>Backstory: </strong>
+                        </p>
+                        <p>
+                          <strong>Skills: </strong>
+                        </p>
+                        <p>
+                          <strong>Features: </strong>
+                        </p>
+                        <p>
+                          <strong>Spells: </strong>
+                        </p>
+                        <p>
+                          <strong>Traits: </strong>
+                        </p>
                       </div>
                       <br />
-                      <p className=" text-center"><Button color="warning" variant="flat" onPress={() => setinvenOpen(true)}>OPEN INVENTORY</Button></p>
-                      <Modal isOpen={isinvenOpen} >
+                      <p className=" text-center">
+                        <Button
+                          color="warning"
+                          variant="flat"
+                          onClick={() => setinvenOpen(true)}
+                        >
+                          OPEN INVENTORY
+                        </Button>
+                      </p>
+                      <Modal
+                        closeButton
+                        isOpen={isinvenOpen}
+                        onClose={() => setinvenOpen(false)}
+                      >
                         <ModalContent>
-                          {(oninvenClose) => (
-                            <>
-                              <ModalHeader className="flex flex-col gap-1">YOUR ITEMS</ModalHeader>
-                              <ModalBody>
-                                  items
-                              </ModalBody>
-                              <ModalFooter>
-                                <Button color="danger"  onPress={() => setinvenOpen(false)}>
-                                  Close
-                                </Button>
-                              </ModalFooter>
-                            </>
-                          )}
+                          <ModalHeader className="flex flex-col gap-1">
+                            YOUR ITEMS
+                          </ModalHeader>
+                          <ModalBody>items</ModalBody>
+                          <ModalFooter>
+                            <Button
+                              color="danger"
+                              onPress={() => setinvenOpen(false)}
+                            >
+                              Close
+                            </Button>
+                          </ModalFooter>
                         </ModalContent>
                       </Modal>
-                      
-                      <p className=" text-center"><Button color="danger" variant="flat" onPress={() => setdeleteOpen(true)}>DELETE CHARACTER</Button></p>
-                      <Modal isOpen={isdeleteOpen} >
+
+                      <p className=" text-center">
+                        <Button
+                          color="danger"
+                          variant="flat"
+                          onClick={() => setdeleteOpen(true)}
+                        >
+                          DELETE CHARACTER
+                        </Button>
+                      </p>
+                      <Modal
+                        closeButton
+                        isOpen={isdeleteOpen}
+                        onClose={() => setdeleteOpen(false)}
+                      >
                         <ModalContent>
-                          {(ondeleteClose) => (
-                            <>
-                              <ModalHeader className="flex flex-col gap-1">ARE YOU SURE TO DELETE YOUR CHARACTER ?</ModalHeader>
-                              <ModalBody>
-                                  <Button color="success" variant="light">YES</Button>
-                                  <Button color="danger" variant="light" onPress={() => setdeleteOpen(false)}>NO</Button>
-                              </ModalBody>
-                              <ModalFooter>
-                                <Button color="danger" onPress={() => setdeleteOpen(false)}>
-                                  Close
-                                </Button>
-                              </ModalFooter>
-                            </>
-                          )}
+                          <ModalHeader className="flex flex-col gap-1">
+                            ARE YOU SURE TO DELETE YOUR CHARACTER ?
+                          </ModalHeader>
+                          <ModalBody>
+                            <Button color="success" variant="light">
+                              YES
+                            </Button>
+                            <Button
+                              color="danger"
+                              variant="light"
+                              onPress={() => setdeleteOpen(false)}
+                            >
+                              NO
+                            </Button>
+                          </ModalBody>
+                          <ModalFooter>
+                            <Button
+                              color="danger"
+                              onPress={() => setdeleteOpen(false)}
+                            >
+                              Close
+                            </Button>
+                          </ModalFooter>
                         </ModalContent>
                       </Modal>
                     </ModalBody>
@@ -126,22 +183,14 @@ export default function Mycharacter({ }: Props) {
             </Modal>
           </div>
 
-
-
-
-
-
-          <div className=" text-center mt-40" >
-
-            <Link href="createcharacter">
-              <Button size="lg" radius='md' color='success' variant='solid' >Create Character</Button>
-            </Link>
-          </div>
+        <div className=" text-center mt-40">
+          <Link href="createcharacter">
+            <Button size="lg" radius="md" color="success" variant="solid">
+              Create Character
+            </Button>
+          </Link>
         </div>
-
-        <br />
       </div>
     </div>
-
   );
 }

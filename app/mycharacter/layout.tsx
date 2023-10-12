@@ -1,3 +1,4 @@
+import profileStyle from "./profileStyle.module.css";
 export default function MycharacterLayout({
 	children,
 }: {
@@ -5,7 +6,7 @@ export default function MycharacterLayout({
 }) {
 	return (
 		<section className="">
-			<div className="">
+			<div style={{backgroundColor:"#dbb794"}}>
 				{children}
 			</div>
 		</section>
