@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import profileStyle from "./profileStyle.module.css";
+import "./profileStyle.css";
 import line from "./images/line.png";
 import { log } from "util";
 import {
@@ -37,8 +37,8 @@ export default function Mycharacter({ }: Props) {
   
 
   return (
-    <div className={profileStyle.profileBox}>
-      <div className="container  flex-col items-center justify-center w-9/12 mx-auto " style={{ minHeight: '120vh', marginTop: '-150px' }}>
+    <div className="profileBox">
+      <div className="flex-items-center justify-center mx-auto " style={{ minHeight: '120vh', marginTop: '-150px' }}>
         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
         <div className="font justify-items-center" >
@@ -47,7 +47,7 @@ export default function Mycharacter({ }: Props) {
           </div>
           <br />
           <div className="text-center font" style={{ fontSize: '20px' }}>
-            <Tabs aria-label="Options" color="primary" radius="full" size="md">
+            <Tabs aria-label="Options" color="primary" radius="md" size="md">
               <Tab key="charactername" 
                 title={
                   <div className="flex items-center space-x-2">
@@ -158,7 +158,7 @@ export default function Mycharacter({ }: Props) {
                 </Card>
               </Tab>
             </Tabs>
-          </div>  
+          </div>
           <div className=" text-center mt-40" >
             <Link href="createcharacter">
               <Button size="lg" radius="full" color="warning" variant="shadow" >Create Character</Button>
