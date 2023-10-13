@@ -33,6 +33,7 @@
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "framer-motion": "^10.16.4",
+    "fs": "^0.0.1-security",
     "intl-messageformat": "^10.5.0",
     "next": "^13.5.4",
     "next-auth": "^4.23.2",
@@ -42,7 +43,7 @@
     "postcss": "^8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sweetalert2": "^11.7.32",
+    "sweetalert2": "^11.6.13",
     "tailwind-variants": "^0.1.13",
     "typescript": "5.0.4"
   },

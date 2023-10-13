@@ -4,8 +4,9 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 import { Navbar } from "@/components/navbar";
-import { Link } from "@nextui-org/link";
 import clsx from "clsx";
+import { AuthProvider } from "./context/AuthProvider";
+
 
 export const metadata: Metadata = {
 	title: {
@@ -37,7 +38,7 @@ export default function RootLayout({
 					"bg-cover font-sans img1 antialiased",
 					fontSans.variable
 				)}
-			>
+			><AuthProvider>
 				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 					<div className="relative flex flex-col h-screen">
 						<Navbar />
@@ -49,6 +50,7 @@ export default function RootLayout({
 						</footer>
 					</div>
 				</Providers>
+				</AuthProvider>
 			</body>
 		</html>
 	);
