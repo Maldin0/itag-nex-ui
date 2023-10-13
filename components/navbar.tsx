@@ -8,6 +8,13 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
+import {  
+  Dropdown,  
+  DropdownTrigger,  
+  DropdownMenu,  
+  DropdownSection,  
+  DropdownItem
+} from "@nextui-org/dropdown";
 import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import {Avatar} from "@nextui-org/react";
@@ -31,6 +38,7 @@ export const Navbar = () => {
     }
   }
 
+
   async function handleLogin() {
     try {
       setLoading(true);
@@ -52,7 +60,27 @@ export const Navbar = () => {
       <NavbarContent justify="end">
         <NavbarItem>
          {session ? (
+          <Dropdown>
+          <DropdownTrigger>
             <Avatar isBordered src={session.user?.image!}></Avatar>
+          </DropdownTrigger>
+          <DropdownMenu>
+
+              <DropdownItem>
+                Profile
+              </DropdownItem> 
+              <DropdownItem 
+              onClick={async () => {
+                document.body.style.cursor = "wait";
+                await handleLogout();
+              }}
+              className="text-danger" 
+              color="danger">
+                  Logout
+              </DropdownItem>
+          </DropdownMenu>
+          </Dropdown>
+        
           ) : (
             <Button
               as={Link}
@@ -63,12 +91,10 @@ export const Navbar = () => {
               }}
               variant="flat"
             >
-              {/* ... (SVG for the Login button) */}
               Login
             </Button>
           )}
         </NavbarItem>
-        {/* <Avatar icon={<AvatarIcon/>}></Avatar> */}
       </NavbarContent>
     </NextUINavbar>
   );
