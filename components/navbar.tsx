@@ -90,8 +90,9 @@ export const Navbar = () => {
                 await handleLogin();
               }}
               variant="flat"
+              disabled={loading}
             >
-              Login
+              {loading ? "Loading..." : "Login"}
             </Button>
           )}
         </NavbarItem>
