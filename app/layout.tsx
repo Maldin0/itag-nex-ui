@@ -10,7 +10,7 @@ import { AuthProvider } from "./context/AuthProvider";
 
 export const metadata: Metadata = {
 	title: {
-		default: siteConfig.name,
+		default: "ITAG",
 		template: `%s - ${siteConfig.name}`,
 	},
 	description: siteConfig.description,

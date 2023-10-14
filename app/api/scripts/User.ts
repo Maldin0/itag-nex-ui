@@ -69,7 +69,7 @@ export default class User {
         try{
             await this.db.tx(async (t)=>{
                 const char = new Character(this.user_id)
-
+                
                 const query = 'insert into characters(user_id,race_id,class_id,name,background,dex,wis,int,str,cha,con,hp,is_active,gold) values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12, false ,$13) returning cha_id'
                 const value = [this.user_id,race_id, class_id, name, background,dex,wis,int,str,cha,con,hp, gold]
                 const Chadata = await t.one(query,value)

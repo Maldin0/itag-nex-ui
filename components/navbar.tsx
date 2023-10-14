@@ -19,18 +19,23 @@ import { Button } from "@nextui-org/button";
 import { Link } from "@nextui-org/link";
 import {Avatar} from "@nextui-org/react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter, usePathname } from "next/navigation";
 import Swal from "sweetalert2";
 
 import React from "react";
 export const Navbar = () => {
+  const router = useRouter();
   const { data: session } = useSession();
-
   const [loading, setLoading] = React.useState<boolean>(false);
+  const pathname = usePathname();
+  const disabledKeys = pathname === "/mycharacter" ? ["mycharacter"] : [];
+
 
   async function handleLogout() {
     try {
       setLoading(true);
-      await signOut({callbackUrl: '/'});
+      await signOut({
+        callbackUrl: '/'});
     } catch (error) {
       console.log(error);
     } finally {
@@ -50,6 +55,7 @@ export const Navbar = () => {
     }
   }
 
+  
   return (
     <NextUINavbar style={{ background: "white"}}>
       <NavbarBrand>
@@ -62,12 +68,15 @@ export const Navbar = () => {
          {session ? (
           <Dropdown>
           <DropdownTrigger>
-            <Avatar isBordered src={session.user?.image!}></Avatar>
+            <Avatar isBordered src={session.user?.image!} style={{ cursor: "pointer" }}></Avatar>
           </DropdownTrigger>
-          <DropdownMenu>
+          <DropdownMenu disabledKeys={disabledKeys}>
 
-              <DropdownItem>
-                Profile
+              <DropdownItem key="mycharacter" onClick={()=>{
+                router.push("/mycharacter")
+              }}
+              >
+                My Character
               </DropdownItem> 
               <DropdownItem 
               onClick={async () => {

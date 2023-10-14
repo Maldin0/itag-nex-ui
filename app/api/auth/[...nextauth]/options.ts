@@ -15,6 +15,7 @@ const pool = new Pool({
 })
 
 export const options: NextAuthOptions = {
+    secret: process.env.NEXTAUTH_SECRET || "",
     adapter: PostgresAdapter(pool),
     providers: [
     GoogleProvider({
