@@ -13,7 +13,8 @@ import {
     Input,
     Button,
     Select,
-    SelectItem
+    SelectItem,
+    Textarea
 } from "@nextui-org/react";
 import Link from 'next/link';
 import { divider } from '@nextui-org/theme';
@@ -79,7 +80,7 @@ export default function Createcharacter({ }: Props) {
 
     return (
         <div className={`${CreateChaStyle.box} container flex flex-col items-center justify-center mx-auto `}  >
-            <br /><br /><br /><br />
+            <br /><br /><br />
             <div className={`${CreateChaStyle.box2} container flex flex-col items-center justify-center mx-auto `}>
                 <div>
                     <h1 className="font">
@@ -121,7 +122,18 @@ export default function Createcharacter({ }: Props) {
                     </Select>
                 </div>
 
+
+
                 <p>&nbsp;</p>
+                <div className="row" style={{ width: '40%'}}>
+                    <Textarea
+                        label="BackStory"
+                        labelPlacement="inside"
+                        placeholder="write your backstory"
+                        className="w-full"
+                        
+                    />
+                </div>
                 <p>&nbsp;</p>
                 <div>
                     <Button size='lg' color='warning' variant='faded' onClick={generateRandomNumbers} className={CreateChaStyle.inputBox} style={{}}><p>Random Stats: {randomNumbers.join(", ")}</p></Button>
@@ -140,15 +152,16 @@ export default function Createcharacter({ }: Props) {
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
             </div>
-            <br /><br />
-            
+            <br />
+
             <div >
                 <Button size='lg' color="success" variant="solid">
                     CREATE CHARACTER
                 </Button>
             </div>
-            <br /><br /><br />
+            <br />
         </div>
+        
     );
 
 }
