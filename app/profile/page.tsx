@@ -34,21 +34,23 @@ export default function Profile({ }: Props) {
 
                 <div className={ProfileStyle.line}></div>
 
-                <div className={ProfileStyle.circle}></div>
+                {/*<div className={ProfileStyle.gridLayout}>*/}
+                    <div className={ProfileStyle.circle}></div>
 
-                <div
-                  className={ProfileStyle.username}
-                  style={{ display: "inline-block" }}
-                >
-                  Username : {user?.user._username}{" "}
-                </div>
+                    <div
+                        className={ProfileStyle.username}
+                        style={{ display: "inline-block" }}
+                    >
+                        Username : {user?.user._username}{" "}
+                    </div>
 
-                <div
-                  className={ProfileStyle.email}
-                  style={{ display: "inline-block" }}
-                >
-                  Email : {user?.user._email}
-                </div>
+                    <div
+                        className={ProfileStyle.email}
+                        style={{ display: "inline-block" }}
+                    >
+                        Email : {user?.user._email}
+                    </div>
+                {/*</div>*/}
                 <br /><br />
             </div>
             <br /><br /><br /><br />
