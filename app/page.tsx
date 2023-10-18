@@ -20,9 +20,11 @@ export default function Home() {
       {(session && session.user) ? (
         <>
           <br /><br /><br />
-          <div className="text-center pl-36" style={{ height: "500px", display: 'flex', alignItems: 'left', justifyContent: 'left'}}>
-            <h1 className="font text-9xl" style={{ fontStyle: "italic", color: 'white', textShadow: '7px 7px 4px rgba(0, 0, 0, 1)' }}>Welcome <br />{session.user.name}</h1>
-            <div className=" px-96 py-24 gap-14" style={{display: 'flex',flexDirection: 'column',alignItems: 'right',justifyContent: 'right'}}>
+          <div className="text-center pl-36" style={{ height: "500px", display: 'flex', justifyContent: 'space-between' }}>
+            <h1 className="font text-9xl" style={{ fontStyle: "italic", color: 'white', textShadow: '7px 7px 4px rgba(0, 0, 0, 1)' }}>
+              Welcome <br />{session.user.name}
+            </h1>
+            <div className="py-24 gap-14 w-52" style={{ display: 'flex', flexDirection: 'column', marginRight: '25rem' }}>
               <Button radius="md" size="lg" color="success" variant="solid">
                 create session
               </Button>
@@ -32,7 +34,7 @@ export default function Home() {
             </div>
           </div>
 
-          
+
           <br /><br /><br />
         </>
       ) : (
