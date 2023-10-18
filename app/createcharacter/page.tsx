@@ -4,6 +4,7 @@ import CreateChaStyle from './CreateChaStyle.module.css';
 import LoginStyle from '../login/LoginStyle.module.css';
 
 import { useRouter } from 'next/navigation';
+import { Character } from '../api/createChar/route';
 
 import {
     Dropdown,
@@ -18,6 +19,7 @@ import {
 } from "@nextui-org/react";
 import Link from 'next/link';
 import { divider } from '@nextui-org/theme';
+import { useSession } from 'next-auth/react';
 
 
 type Props = {}
@@ -29,11 +31,11 @@ type Props = {}
 
 export default function Createcharacter({ }: Props) {
     const router = useRouter();
+    const { data: session } = useSession();
     const [characterName, setCharacterName] = useState<string>("");
-    const [loading, setLoading] = useState<boolean>(false);
-    const [selectedRace, setSelectedRace] = useState<string>("");
-    const [selectedClass, setSelectedClass] = useState<string>("");
-    const [characterBG, setCharacterBG] = useState<string>("");
+    const [characterRace, setCharacterRace] = useState<number>(0);
+    const [characterClass, setCharacterClass] = useState<number>(0);
+    const [characterBackstory, setCharacterBackstory] = useState<string>("");
     const [randomNumbers, setRandomNumbers] = useState<number[]>([]);
     const allRace: { [key: string]: number } = {
         "Human": 1,
@@ -74,6 +76,32 @@ export default function Createcharacter({ }: Props) {
         setRandomNumbers(nums);
     };
 
+    async function handleCreateChar() {
+        try {
+            await fetch('/api/createChar', {
+                method: 'POST',
+                body: JSON.stringify({
+                    email: session?.user?.email,
+                    name: characterName,
+                    race_id: characterRace,
+                    class_id: allClass,
+                    stats: {
+                        dex: randomNumbers[0],
+                        wis: randomNumbers[1],
+                        int: randomNumbers[2],
+                        str: randomNumbers[3],
+                        cha: randomNumbers[4],
+                        con: randomNumbers[5]
+                    },
+                    background: characterBackstory
+                }),
+            })
+        } catch (error) { 
+            console.log(error);
+        }
+    }
+
+
     React.useEffect(() => {
         generateRandomNumbers();
     }, []);
@@ -93,7 +121,13 @@ export default function Createcharacter({ }: Props) {
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
                 <div className="row" style={{ width: '40%' }}>
-                    <Input size='lg' placeholder="Name" type="text"></Input>
+                    <Input 
+                        size='lg' 
+                        placeholder="Name" 
+                        type="text" 
+                        value={characterName} 
+                        onChange={(e) => setCharacterName(e.target.value)}>
+                    </Input>
                 </div>
 
                 <p>&nbsp;</p>
@@ -101,7 +135,7 @@ export default function Createcharacter({ }: Props) {
                     <Select size='lg' label="Choose a Race" className="max-xs">
                         {
                             Object.entries(allRace).map(([label, value]) => (
-                                <SelectItem key={value} value={value}>
+                                <SelectItem key={value} value={value} onClick={() => setCharacterRace(value)}>
                                     {label}
                                 </SelectItem>
                             ))
@@ -114,7 +148,7 @@ export default function Createcharacter({ }: Props) {
                     <Select size='lg' label="Choose a Class" className="max-xs">
                         {
                             Object.entries(allClass).map(([label, value]) => (
-                                <SelectItem key={value} value={value}>
+                                <SelectItem key={value} value={value} onClick={() => setCharacterClass(value)}>
                                     {label}
                                 </SelectItem>
                             ))
@@ -131,7 +165,7 @@ export default function Createcharacter({ }: Props) {
                         labelPlacement="inside"
                         placeholder="write your backstory"
                         className="w-full"
-                        
+                        onChange={(e) => setCharacterBackstory(e.target.value)}
                     />
                 </div>
                 <p>&nbsp;</p>
@@ -155,7 +189,7 @@ export default function Createcharacter({ }: Props) {
             <br />
 
             <div >
-                <Button size='lg' color="success" variant="solid">
+                <Button size='lg' color="success" variant="solid" onClick={async () => {handleCreateChar()}}>
                     CREATE CHARACTER
                 </Button>
             </div>
@@ -165,6 +199,3 @@ export default function Createcharacter({ }: Props) {
     );
 
 }
-
-
-{/*  */ }

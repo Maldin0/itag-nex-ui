@@ -1,9 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next/types";
 import DBConnection from "../scripts/DBConnection";
 
-const db = DBConnection.getInstance().getDB();
-
-type Character = {
+export type Character = {
     name: string,
     race_id: number,
     class_id: number,
@@ -23,14 +21,15 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
     const email = req.body.email
     const charData: Character = req.body.character
     if (!email) {
-        res.status(400).json({ error: "Missing email" })
+        res.status(400).json({ error: 'Missing email' })
         return
     }
+    const db = DBConnection.getInstance().getDB();
 
     try {
         await db.tx(async (t) => {
             const user_id = await t.one('SELECT user_id FROM "users" WHERE email = $1', [email])
-
+            
             const query = `insert into 
             characters(user_id,race_id,class_id,name,background,dex,wis,int,str,cha,con,is_active) 
             values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11, false)
@@ -49,6 +48,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
             await t.none(set_true, [Chadata.char_id])
         }).then(() => {
             console.log('Create character successfully.');
+            res.status(200)
         })
     } catch (error) {
         res.status(500).json({ error: error})
