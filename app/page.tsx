@@ -22,11 +22,11 @@ export default function Home() {
           <br /><br /><br />
           <div className="text-center pl-36" style={{ height: "500px", display: 'flex', alignItems: 'left', justifyContent: 'left'}}>
             <h1 className="font text-9xl" style={{ fontStyle: "italic", color: 'white', textShadow: '7px 7px 4px rgba(0, 0, 0, 1)' }}>Welcome <br />{session.user.name}</h1>
-            <div className=" px-48 py-24 gap-14" style={{display: 'flex',flexDirection: 'column',alignItems: 'right',justifyContent: 'right'}}>
-              <Button radius="lg" size="lg" color="warning" variant="solid">
+            <div className=" px-96 py-24 gap-14" style={{display: 'flex',flexDirection: 'column',alignItems: 'right',justifyContent: 'right'}}>
+              <Button radius="md" size="lg" color="success" variant="solid">
                 create session
               </Button>
-              <Button radius="md" size="lg" color="warning" variant="solid">
+              <Button radius="md" size="lg" color="success" variant="solid">
                 join session
               </Button>
             </div>
