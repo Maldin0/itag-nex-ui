@@ -15,11 +15,6 @@ import Swal from 'sweetalert2';
 
 type Props = {}
 
-
-
-
-
-
 export default function Createcharacter({ }: Props) {
     const router = useRouter();
     const { data: session } = useSession({
