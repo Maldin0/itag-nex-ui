@@ -19,6 +19,8 @@ import { Char } from "../api/userData/route";
 type Props = {};
 
 export default function Mycharacter({ }: Props) {
+
+  const [selectedCharacter, setSelectedCharacter] = useState<Char | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session } = useSession({
     required: true,
@@ -77,15 +79,23 @@ export default function Mycharacter({ }: Props) {
         <br />
         <br />
         <br />
-        <div className="text-left " style={{ fontSize: "30px" }}>
-          {characters.map((char) => (
-            <div key={char.char_id}>
-              <h1 onClick={onOpen}>{char.name}</h1>
+         <div className="text-left " style={{ fontSize: "30px" }}>
+        {characters.map((char) => (
+          <div key={char.char_id}>
+            <h1 onClick={() => {
+              onOpen();
+              setSelectedCharacter(char);
+            }}>{char.name}</h1>
+
+            {selectedCharacter && selectedCharacter.char_id === char.char_id && (
               <Modal
                 size="5xl"
                 backdrop="blur"
                 isOpen={isOpen}
-                onClose={onClose}
+                onClose={() => {
+                  onClose();
+                  setSelectedCharacter(null);
+                }}
                 className="font"
                 style={{ color: "white", fontSize: "20px" }}
               >
@@ -93,7 +103,7 @@ export default function Mycharacter({ }: Props) {
                   {(onClose) => (
                     <>
                       <ModalHeader className="flex flex-col gap-1">
-                        <h1 style={{ fontSize: "30px" }}>(Character name)</h1>
+                        <h1 style={{ fontSize: "30px" }}>{selectedCharacter.name}</h1>
                       </ModalHeader>
                       <ModalBody>
                         <div className=" p-3">
@@ -191,6 +201,7 @@ export default function Mycharacter({ }: Props) {
                                 Close
                               </Button>
                             </ModalFooter>
+                            
                           </ModalContent>
                         </Modal>
                       </ModalBody>
@@ -203,6 +214,7 @@ export default function Mycharacter({ }: Props) {
                   )}
                 </ModalContent>
               </Modal>
+              )}
             </div>
           ))}
         </div>
