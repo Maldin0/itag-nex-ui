@@ -1,25 +1,16 @@
 "use client"
 import React, { useState } from 'react';
 import CreateChaStyle from './CreateChaStyle.module.css';
-import LoginStyle from '../login/LoginStyle.module.css';
-
-import { useRouter } from 'next/navigation';
-import { Character } from '../api/createChar/route';
-
+import { useRouter, redirect } from 'next/navigation';
 import {
-    Dropdown,
-    DropdownTrigger,
-    DropdownMenu,
-    DropdownItem,
     Input,
     Button,
     Select,
     SelectItem,
     Textarea
 } from "@nextui-org/react";
-import Link from 'next/link';
-import { divider } from '@nextui-org/theme';
 import { useSession } from 'next-auth/react';
+import Swal from 'sweetalert2';
 
 
 type Props = {}
@@ -31,7 +22,12 @@ type Props = {}
 
 export default function Createcharacter({ }: Props) {
     const router = useRouter();
-    const { data: session } = useSession();
+    const { data: session } = useSession({
+        required: true,
+        onUnauthenticated() {
+        redirect("/api/auth/signin?callbackUrl=/mycharacter");
+        }
+    });
     const [characterName, setCharacterName] = useState<string>("");
     const [characterRace, setCharacterRace] = useState<number>(0);
     const [characterClass, setCharacterClass] = useState<number>(0);
@@ -77,30 +73,56 @@ export default function Createcharacter({ }: Props) {
     };
 
     async function handleCreateChar() {
+        if (!characterName || characterRace === 0 || characterClass === 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill in all fields!',
+            })
+            return;
+        }
         try {
-            await fetch('/api/createChar', {
+            const response = await fetch('/api/createChar', {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify({
                     email: session?.user?.email,
-                    name: characterName,
-                    race_id: characterRace,
-                    class_id: allClass,
-                    stats: {
-                        dex: randomNumbers[0],
-                        wis: randomNumbers[1],
-                        int: randomNumbers[2],
-                        str: randomNumbers[3],
-                        cha: randomNumbers[4],
-                        con: randomNumbers[5]
-                    },
-                    background: characterBackstory
+                    Character:{
+                        name: characterName,
+                        race_id: characterRace,
+                        class_id: characterClass,
+                        stats: {
+                            dex: randomNumbers[0],
+                            wis: randomNumbers[1],
+                            int: randomNumbers[2],
+                            str: randomNumbers[3],
+                            cha: randomNumbers[4],
+                            con: randomNumbers[5]
+                        },
+                        background: characterBackstory
+                    }
                 }),
             })
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Your character has been created!',
+                }).then(() => { router.push('/mycharacter') })
+            }
         } catch (error) { 
             console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            })
         }
     }
-
 
     React.useEffect(() => {
         generateRandomNumbers();

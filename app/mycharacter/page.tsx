@@ -1,10 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import profileStyle from "./profileStyle.module.css";
-import line from "./images/line.png";
-import { log } from "util";
 import {
   Modal,
   ModalContent,
@@ -13,28 +11,50 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
-  Table,
-  TableHeader,
-  TableBody,
-  TableColumn,
-  TableRow,
-  TableCell,
-  DropdownMenu,
-  Dropdown,
-  DropdownTrigger,
-  DropdownSection,
-  DropdownItem,
 } from "@nextui-org/react";
+import { redirect } from "next/navigation";
+import { Char } from "../api/userData/route";
 
-import { Tabs, Tab, Card, CardBody, Chip } from "@nextui-org/react";
 
 type Props = {};
 
 export default function Mycharacter({}: Props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/api/auth/signin?callbackUrl=/mycharacter");
+    }
+  });
+  const [characters, setCharacters] = useState<Char[]>([]);
   const [isinvenOpen, setinvenOpen] = useState(false);
   const [isdeleteOpen, setdeleteOpen] = useState(false);
+
+  async function getCharacter() {
+    try {
+      const response = await fetch("/api/userData", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: session?.user?.email })
+      });
+      const data = await response.json()
+      setCharacters(data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    if (session?.user?.email) {
+      getCharacter();
+    }
+  }, [session]);
+
+  useEffect(() => {
+    console.log(characters);
+  }, [characters]);
 
   return (
     <div

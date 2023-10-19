@@ -6,13 +6,8 @@ import { Image } from "@nextui-org/react";
 import { options } from "./api/auth/[...nextauth]/options"
 import "@/styles/globals.css";
 
-interface User {
-  username?: string;
-  message: string;
-}
 
 export default function Home() {
-  const [user, setUser] = React.useState<User | null>(null);
   const { data: session } = useSession();
 
   return (

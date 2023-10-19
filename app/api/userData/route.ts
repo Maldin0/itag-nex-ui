@@ -1,11 +1,35 @@
-import { NextApiRequest, NextApiResponse } from "next/types";
-import DBConnection from "../scripts/DBConnection";
+import db from "@/utils/database"
 
-const db = DBConnection.getInstance().getDB();
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-    const { email } = req.body
+export type Char = {
+    char_id: number,
+    name: string
+}
+
+export const POST = async (req : Request) => {
+    const {email} = await req.json()
+    console.log(email)
     if (!email) {
-        res.status(400).json({ error: "Missing email" })
-        return
+        return new Response('Email is required.', { status: 400 });
+    }
+
+    try {
+        const user = await db.oneOrNone('SELECT id FROM "users" WHERE email = $1', [email]);
+
+        if (!user) {
+            return new Response('User not found.', { status: 404 });
+        }
+
+        const query = `SELECT char_id, name FROM characters WHERE user_id = $1`;
+        const characters:Char[] = await db.any(query, [user.id]);
+
+        return new Response(JSON.stringify(characters), { status: 200, headers: { 'Content-Type': 'application/json' } });
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error('Error:', error.message);
+            return new Response('An expected error occurred.', { status: 500 });
+        } else {
+            console.error('An unexpected error occurred:', error);
+            return new Response('An unexpected error occurred.', { status: 500 });
+        }
     }
 }
