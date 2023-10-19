@@ -229,13 +229,14 @@ export default function Mycharacter({ }: Props) {
           ))}
         </div>
 
-        <div className=" text-center mt-32">
+        <div className=" text-center mt-16">
           <Link href="createcharacter">
             <Button size="lg" radius="md" color="success" variant="solid">
               Create Character
             </Button>
           </Link>
         </div>
+        
       </div>
     </div>
   );
