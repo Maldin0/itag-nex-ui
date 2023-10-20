@@ -1,4 +1,3 @@
-
 import db from "@/utils/database"
 
 export type Character = {
