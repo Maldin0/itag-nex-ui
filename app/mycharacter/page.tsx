@@ -104,9 +104,7 @@ export default function Mycharacter({ }: Props) {
     console.log(characters);
   }, [characters]);
 
-  useEffect(() => {
-    console.log(selectedChardata?.class.features[1].details);
-  }, [selectedChardata]);
+  
 
   return (
     <div
@@ -133,9 +131,10 @@ export default function Mycharacter({ }: Props) {
           {characters.map((char) => (
             <div key={char.char_id}>
               <div className="flex flex-row items-center gap-20">
-                <h1 onClick={() => {
-                  onOpen();
+                <h1 onClick={() => { 
                   setSelectedCharacter(char);
+                  getCharData(char.char_id);
+                  onOpen();
                 }}>{char.name} </h1>
 
                 <Chip color="success" size="sm" variant="flat">
