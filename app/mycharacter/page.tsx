@@ -314,7 +314,12 @@ export default function Mycharacter({ }: Props) {
                                 ARE YOU SURE TO DELETE YOUR CHARACTER ?
                               </ModalHeader>
                               <ModalBody>
-                                <Button color="success" variant="light">
+                                <Button color="success" variant="light"
+                                onPress={() => {
+                                  deleteCharacter(selectedCharacter.char_id);
+                                  setdeleteOpen(false); // ปิด modal หลังจากลบตัวละครแล้ว
+                                }}
+                                >
                                   YES
                                 </Button>
                                 <Button
