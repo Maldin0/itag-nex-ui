@@ -11,11 +11,14 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
-  Chip
+  Chip, Accordion,
+  AccordionItem
 } from "@nextui-org/react";
 import { redirect } from "next/navigation";
 import { Char } from "../api/userData/route";
 import { CharData } from "../api/charData/route";
+import { data } from "autoprefixer";
+import { features } from "process";
 
 
 type Props = {};
@@ -35,6 +38,25 @@ export default function Mycharacter({ }: Props) {
   const [isinvenOpen, setinvenOpen] = useState(false);
   const [isdeleteOpen, setdeleteOpen] = useState(false);
 
+  async function getCharData(char_id: string | number) {
+
+    try {
+      const response = await fetch("/api/charData", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ char_id: String(char_id) })
+      });
+
+      const data = await response.json();
+      setSelectedChardata(data);
+
+    } catch (error) {
+      console.error("Failed to fetch charData:", error);
+    }
+  }
+
   async function getCharacter() {
     try {
       const response = await fetch("/api/userData", {
@@ -51,27 +73,26 @@ export default function Mycharacter({ }: Props) {
     }
   }
 
-  async function deleteCharacter(char_id: string) {
+  async function deleteCharacter(char_id: number) {
     try {
-        const response = await fetch("/api/deleteChar", { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ char_id: char_id })
-        });
+      const response = await fetch("/api/deleteChar", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ char_id: char_id })
+      });
 
-        if (response.ok) {
-            console.log("Character deleted successfully");
-            
-            getCharacter();
-        } else {
-            console.error("Failed to delete character");
-        }
+      if (response.ok) {
+        console.log("Character deleted successfully");
+        getCharacter();
+      } else {
+        console.error("Failed to delete character");
+      }
     } catch (error) {
-        console.error("Error:", error);
+      console.error("Error:", error);
     }
-}
+  }
 
   useEffect(() => {
     if (session?.user?.email) {
@@ -82,6 +103,10 @@ export default function Mycharacter({ }: Props) {
   useEffect(() => {
     console.log(characters);
   }, [characters]);
+
+  useEffect(() => {
+    console.log(selectedChardata?.class.features[1].details);
+  }, [selectedChardata]);
 
   return (
     <div
@@ -117,8 +142,6 @@ export default function Mycharacter({ }: Props) {
                   Active
                 </Chip>
               </div>
-
-
               <br />
 
               {selectedCharacter && selectedCharacter.char_id === char.char_id && (
@@ -129,6 +152,7 @@ export default function Mycharacter({ }: Props) {
                   onClose={() => {
                     onClose();
                     setSelectedCharacter(null);
+                    getCharData(char.char_id);
                   }}
                   className="font"
                   style={{ color: "white", fontSize: "20px" }}
@@ -140,30 +164,104 @@ export default function Mycharacter({ }: Props) {
                           <h1 style={{ fontSize: "30px" }}>{selectedCharacter.name}</h1>
                         </ModalHeader>
                         <ModalBody>
-                          <div className=" p-3">
+                          <div className=" p-5">
                             <p>
-                              <strong>Class: {selectedChardata?.class.name} </strong>
+                              <strong>Class: {selectedChardata?.class.name}</strong>
                             </p>
                             <p>
                               <strong>Race: {selectedChardata?.race.name}</strong>
                             </p>
-                            <p>
-                              <strong>Status: </strong>
+
+                            <Accordion isCompact variant="shadow">
+                              <AccordionItem key="1" aria-label="Status" title="STATUS">
+                                <div className="pl-10">
+                                  cha: {selectedChardata?.status.cha}
+                                  <br />
+                                  con: {selectedChardata?.status.con}
+                                  <br />
+                                  dex: {selectedChardata?.status.dex}
+                                  <br />
+                                  wis: {selectedChardata?.status.wis}
+                                  <br />
+                                  int: {selectedChardata?.status.int}
+                                  <br />
+                                  str: {selectedChardata?.status.str}
+                                  <br />
+                                  cha: {selectedChardata?.status.cha}
+                                  <br />
+                                  hp: {selectedChardata?.status.hp}
+                                  <br />
+                                  gold: {selectedChardata?.status.gold}
+
+                                </div>
+                              </AccordionItem>
+                            </Accordion>
+                            <p className="pt-5">
+                              <Accordion isCompact variant="shadow">
+                                <AccordionItem key="2" aria-label="skills" title="SKILLS">
+                                  <div className="pl-10">
+                                    {selectedChardata?.skills.map((skill, index) => (
+                                      <div key={index}>
+                                        <strong>{skill.name}:</strong> {skill.details}
+                                        <br />
+                                      </div>
+                                    ))}
+                                  </div>
+                                </AccordionItem>
+                              </Accordion>
+                            </p>
+                            <p className="pt-5">
+                              <Accordion isCompact variant="shadow">
+                                <AccordionItem key="3" aria-label="features" title="FEATURES">
+                                  {selectedChardata?.class.features.map((feature, index) => (
+                                    <div className="pt-5" key={index}>
+                                      <Accordion isCompact variant="shadow">
+                                        <AccordionItem key="4" aria-label="features" title={feature.name}>
+                                          <p className="pl-10">{feature.details}</p>
+                                        </AccordionItem>
+                                      </Accordion>
+                                      <br />
+                                    </div>
+                                  ))}
+
+                                </AccordionItem>
+                              </Accordion>
+                            </p>
+                            <p className="pt-5">
+                              <Accordion isCompact variant="shadow">
+                                <AccordionItem key="5" aria-label="spells" title="SPELLS">
+                                  {selectedChardata?.class.spell.map((spell, index) => (
+                                    <div className="pt-5" key={index}>
+                                      <Accordion isCompact variant="shadow">
+                                        <AccordionItem key="5" aria-label="spells" title={spell.name}>
+                                          <p className="pl-10">
+                                            Interval: {spell.interval_time}
+                                            <br />
+                                            Duration: {spell.duration}
+                                            <br />
+                                            Range: {spell.range}
+                                            <br />
+                                            Details: {spell.details}
+                                            <br />
+                                            <br />
+                                          </p>
+                                        </AccordionItem>
+                                      </Accordion>
+                                    </div>
+                                  ))}
+
+                                </AccordionItem>
+                              </Accordion>
                             </p>
                             <p>
-                              <strong>Skills: </strong>
+
                             </p>
-                            <p>
-                              <strong>Features: </strong>
-                            </p>
-                            <p>
-                              <strong>Spells: </strong>
-                            </p>
-                            <p>
-                              <strong>Traits: </strong>
-                            </p>
-                            <p>
-                              <strong>Backstory: </strong>
+                            <p className="pt-5">
+                              <strong>Backstory: <br />
+                                <p className="pt-2 pl-24">
+                                  {selectedChardata?.background}
+                                </p>
+                              </strong>
                             </p>
                           </div>
                           <br />
@@ -260,8 +358,10 @@ export default function Mycharacter({ }: Props) {
             </Button>
           </Link>
         </div>
-        
+
       </div>
     </div>
+
   );
+
 }

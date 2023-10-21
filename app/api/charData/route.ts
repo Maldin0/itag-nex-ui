@@ -56,6 +56,8 @@ export type CharData = {
     background: string;
 }
 
+
+
 export const POST = async (req : Request) => {
     const { char_id } = await req.json()
     console.log(char_id)
@@ -63,7 +65,14 @@ export const POST = async (req : Request) => {
         return new Response('Character id is required.', { status: 400 });
     }
 
-    let charData: CharData
+    let charData: CharData = {
+        race: { name: "", traits: [] },
+        class: { name: "", features: [], spell: [] },
+        skills: [],
+        items: [],
+        status: { dex: 0, wis: 0, int: 0, str: 0, cha: 0, con: 0, hp: 0, gold: 0 },
+        background: ""
+    }
 
     try {
         await db.tx(async (t) => {
@@ -93,7 +102,7 @@ export const POST = async (req : Request) => {
             for (const feature of featureData) {
                 const temp: Feature = {
                     name: feature.feature_name,
-                    details: feature.feature_details
+                    details: feature.feature_detail
                 }
                 charData.class.features.push(temp)
             }
@@ -107,29 +116,29 @@ export const POST = async (req : Request) => {
                     interval_time: spell.interval_time,
                     duration: spell.duration,
                     range: spell.range,
-                    details: spell.spell_details
+                    details: spell.spell_detail
                 }
                 charData.class.spell.push(temp)
             }
             console.log('spell Loaded')
 
-            const skillsQuery = 'SELECT * FROM characters c JOIN skills s ON (s.class_id = c.class_id) WHERE char_id = $1';
-            const skillData = await t.many(skillsQuery, [char_id])
+            const skillsQuery = 'select * from skills natural join skills_in_char natural join "characters" c  WHERE char_id = $1';
+            const skillData = await t.manyOrNone(skillsQuery, [char_id])
             for (const skill of skillData) {
                 const temp: Skill = {
                     name: skill.skill_name,
-                    details: skill.skill_details
+                    details: skill.skill_detail
                 }
                 charData.skills.push(temp)
             }
             console.log('skills Loaded')
 
-            const itemsQuery = 'SELECT * FROM characters c JOIN items i ON (i.class_id = c.class_id) WHERE char_id = $1';
-            const itemData = await t.many(itemsQuery, [char_id])
+            const itemsQuery = 'SELECT * FROM characters natural join inventories natural join items WHERE char_id = $1';
+            const itemData = await t.manyOrNone(itemsQuery, [char_id])
             for (const item of itemData) {
                 const temp: Item = {
                     name: item.item_name,
-                    details: item.item_details
+                    details: item.item_detail
                 }
                 charData.items.push(temp)
             }
@@ -152,9 +161,10 @@ export const POST = async (req : Request) => {
             charData.background = backgroundData.background;
             console.log('background Loaded')
 
-            console.log(charData);
-            return new Response(JSON.stringify(charData), { status: 200, headers: { 'Content-Type': 'application/json' } });
+            
         })
+        console.log(charData);
+        return new Response(JSON.stringify(charData), { status: 200, headers: { 'Content-Type': 'application/json' } });
     } catch (error) {
         if (error instanceof Error) {
             console.error('Error:', error.message);
