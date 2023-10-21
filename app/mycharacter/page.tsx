@@ -15,12 +15,14 @@ import {
 } from "@nextui-org/react";
 import { redirect } from "next/navigation";
 import { Char } from "../api/userData/route";
+import { CharData } from "../api/charData/route";
 
 
 type Props = {};
 
 export default function Mycharacter({ }: Props) {
 
+  const [selectedChardata, setSelectedChardata] = useState<CharData | null>(null);
   const [selectedCharacter, setSelectedCharacter] = useState<Char | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: session } = useSession({
@@ -48,6 +50,28 @@ export default function Mycharacter({ }: Props) {
       console.error(error);
     }
   }
+
+  async function deleteCharacter(char_id: string) {
+    try {
+        const response = await fetch("/api/deleteChar", { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ char_id: char_id })
+        });
+
+        if (response.ok) {
+            console.log("Character deleted successfully");
+            
+            getCharacter();
+        } else {
+            console.error("Failed to delete character");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
 
   useEffect(() => {
     if (session?.user?.email) {
@@ -118,10 +142,10 @@ export default function Mycharacter({ }: Props) {
                         <ModalBody>
                           <div className=" p-3">
                             <p>
-                              <strong>Class: </strong>
+                              <strong>Class: {selectedChardata?.class.name} </strong>
                             </p>
                             <p>
-                              <strong>Race: </strong>
+                              <strong>Race: {selectedChardata?.race.name}</strong>
                             </p>
                             <p>
                               <strong>Status: </strong>
