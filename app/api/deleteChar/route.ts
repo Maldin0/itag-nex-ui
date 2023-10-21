@@ -10,6 +10,7 @@ export const POST = async (req : Request) => {
     try {
         await db.tx(async (t) => {
             await t.none('DELETE FROM inventories WHERE char_id = $1', [char_id]);
+            await t.none('DELETE FROM skills_in_char WHERE char_id = $1', [char_id]);
             await t.none('DELETE FROM characters WHERE char_id = $1', [char_id]);
         });
 
