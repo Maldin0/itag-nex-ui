@@ -6,7 +6,7 @@ export default function MycharacterLayout({
 }) {
 	return (
 		<section className="">
-			<div style={{backgroundColor:"#dbb794"}}>
+			<div className="">
 				{children}
 			</div>
 		</section>
