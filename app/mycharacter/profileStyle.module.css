@@ -98,9 +98,19 @@
 
 
 .line {
-  position: static;
+  position: relative;
   width: 100%;
   height: 0.1em;
+  border-radius: 1em;
+  background-color: saddlebrown;
+}
+
+.line2 {
+  position: static;
+  width: 70%;
+  margin-left: auto; /* ใส่เพิ่ม */
+  margin-right: auto; /* ใส่เพิ่ม */
+  height: 0.1px;
   border-radius: 1em;
   background-color: saddlebrown;
 }
@@ -126,6 +136,13 @@
   background-color: black;
   color: white;
   border-radius: 10em;
+}
+
+.underline h1{
+  border-bottom: 0.1px solid rgb(153, 72, 19);
+  display: inline-block; /* ทำให้ h1 มีขนาดตามข้อความ */
+  margin: 0 auto; /* สำหรับจัดกลางตัวอักษร */
+  /* ระบุคุณสมบัติอื่น ๆ ที่คุณต้องการ */
 }
 
 .button a {
@@ -294,4 +311,15 @@
   padding: 10px;
   background-color: #bb9673;
   margin-left: 5vw;
+}
+
+.box {
+  background-color: #AA7441;
+  -webkit-border-radius: 5em; 
+}
+
+.box2 {
+  -webkit-border-radius: 3em; 
+  background-color: wheat;
+  width: 90%;
 }
