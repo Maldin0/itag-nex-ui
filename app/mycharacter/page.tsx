@@ -13,7 +13,7 @@ import {
   useDisclosure,
   Chip, Accordion,
   AccordionItem,
-  ScrollShadow
+  Switch
 } from "@nextui-org/react";
 import { redirect } from "next/navigation";
 import { Char } from "../api/userData/route";
@@ -39,6 +39,18 @@ export default function Mycharacter({ }: Props) {
   const [characters, setCharacters] = useState<Char[]>([]);
   const [isinvenOpen, setinvenOpen] = useState(false);
   const [isdeleteOpen, setdeleteOpen] = useState(false);
+
+  const handleSwitchChange = (charId: number) => {
+    setCharacters(prevChars =>
+      prevChars.map(char => {
+        if (char.char_id === charId) {
+          return { ...char, is_active: !char.is_active }; 
+        } else {
+          return { ...char, is_active: false }; 
+        }
+      })
+    );
+  };
 
   async function getCharData(char_id: string | number) {
 
@@ -129,15 +141,23 @@ export default function Mycharacter({ }: Props) {
           <br />
           <br />
           <br />
-          <div className=" text-center" style={{ fontSize: "30px" }}>
+          <div className="text-center" style={{ fontSize: "30px" }}>
             {characters.map((char) => (
-              <div key={char.char_id}>
-                <div className={profileStyle.underline} >
-                  <h1 onClick={() => {
+              <div key={char.char_id} >
+                <div className={profileStyle.underline}>
+                  <h1 style={{ display: 'inline-block', verticalAlign: 'middle' }} onClick={() => {
                     setSelectedCharacter(char);
                     getCharData(char.char_id);
                     onOpen();
-                  }}>{char.name} </h1>
+                  }}>{char.name}</h1>
+
+                  <div style={{ display: 'inline-block', marginLeft: '20px', verticalAlign: 'middle' }}>
+                    <Switch
+                      isSelected={char.is_active}
+                      aria-label="Automatic updates"
+                      onChange={() => handleSwitchChange(char.char_id)}
+                    />
+                  </div>
                 </div>
                 <br />
                 {selectedCharacter && selectedCharacter.char_id === char.char_id && (
@@ -284,7 +304,7 @@ export default function Mycharacter({ }: Props) {
                                   {selectedChardata?.items.map((item, index) => (
                                     <div key={index}>
                                       <strong>{item.name}:</strong> {item.details}
-                                     
+
                                     </div>
                                   ))}
                                 </ModalBody>
