@@ -113,7 +113,7 @@ export default function Mycharacter({ }: Props) {
       className={`${profileStyle.box} container flex flex-col justify-center mx-auto `}
 
     >
-      
+
       <div className={`${profileStyle.box2} container flex flex-col items-stretch justify-center mx-auto my-10 `}>
         <br />
 
@@ -280,7 +280,14 @@ export default function Mycharacter({ }: Props) {
                                 <ModalHeader className="flex flex-col gap-1">
                                   YOUR ITEMS
                                 </ModalHeader>
-                                <ModalBody>items</ModalBody>
+                                <ModalBody>
+                                  {selectedChardata?.items.map((item, index) => (
+                                    <div key={index}>
+                                      <strong>{item.name}:</strong> {item.details}
+                                     
+                                    </div>
+                                  ))}
+                                </ModalBody>
                                 <ModalFooter>
                                   <Button
                                     color="danger"
@@ -362,9 +369,9 @@ export default function Mycharacter({ }: Props) {
           </div>
 
         </div>
-        
+
       </div>
-      
+
     </div>
 
   );
