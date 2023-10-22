@@ -41,15 +41,21 @@ export default function Mycharacter({ }: Props) {
   const [isdeleteOpen, setdeleteOpen] = useState(false);
 
   const handleSwitchChange = (charId: number) => {
-    setCharacters(prevChars =>
-      prevChars.map(char => {
+    setCharacters(prevChars => {
+      const isCurrentlyActive = prevChars.find(char => char.char_id === charId)?.is_active;
+      const hasOtherActive = prevChars.some(char => char.char_id !== charId && char.is_active);
+
+      return prevChars.map(char => {
         if (char.char_id === charId) {
-          return { ...char, is_active: !char.is_active }; 
+          if (isCurrentlyActive && !hasOtherActive) {
+            return char;
+          }
+          return { ...char, is_active: !char.is_active };
         } else {
-          return { ...char, is_active: false }; 
+          return { ...char, is_active: false };
         }
-      })
-    );
+      });
+    });
   };
 
   async function getCharData(char_id: string | number) {
