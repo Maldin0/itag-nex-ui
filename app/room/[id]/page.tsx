@@ -137,11 +137,11 @@ export default function Room({ params }: Props) {
 
       let pollingFrequency;
       if (timeSinceLastActivity < 5 * 60 * 1000) { // Less than 5 minutes
-        pollingFrequency = 1000; // Poll every second
+        pollingFrequency = 2000; // Poll every second
       } else if (timeSinceLastActivity < 10 * 60 * 1000) { // Less than 10 minutes
-        pollingFrequency = 5000; // Poll every 5 seconds
+        pollingFrequency = 30000; // Poll every 5 seconds
       } else {
-        pollingFrequency = 30000; // Poll every 30 seconds
+        pollingFrequency = 600000; // Poll every 30 seconds
       }
 
       pollingTimer = setTimeout(pollChat, pollingFrequency);
