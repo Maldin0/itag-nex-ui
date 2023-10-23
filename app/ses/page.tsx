@@ -16,7 +16,7 @@ export default function Ses({ }: Props) {
             playerName: 'Player1'
         },
         {
-            masterCheckbox: false,
+            masterCheckbox: true,
             playerName: 'Player2'
         },
         //... คุณสามารถเพิ่มเซสชันเพิ่มเติมตามต้องการ
@@ -38,9 +38,14 @@ export default function Ses({ }: Props) {
                             {sessions.map((session, index) => (
                                 <React.Fragment key={index}>
                                     <h1>
-                                        <Checkbox defaultSelected={session.masterCheckbox} size="lg" color="warning"></Checkbox>
+                                        <Checkbox defaultSelected={session.masterCheckbox} isDisabled={!session.masterCheckbox} size="lg" color="warning" onClick={(e) => {
+                                            if (session.masterCheckbox) {
+                                                e.preventDefault();
+                                            }
+                                        }}
+                                        />
                                     </h1>
-                                   
+
                                 </React.Fragment>
                             ))}
                         </div>
@@ -50,7 +55,7 @@ export default function Ses({ }: Props) {
                                 <React.Fragment key={index}>
                                     <div className={SesStyle.underline}>
                                         <h1>{session.playerName}</h1>
-                                    </div>                  
+                                    </div>
                                 </React.Fragment>
                             ))}
                         </div>
