@@ -7,6 +7,14 @@
     -webkit-border-radius: 3em;
     background-color: wheat;
     width: 90%;
+    
+}
+
+.box2 h1{
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 2rem;
 }
 
 /*.GridCon {*/
