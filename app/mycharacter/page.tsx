@@ -18,9 +18,6 @@ import {
 import { redirect } from "next/navigation";
 import { Char } from "../api/userData/route";
 import { CharData } from "../api/charData/route";
-import { data } from "autoprefixer";
-import { features } from "process";
-
 
 type Props = {};
 

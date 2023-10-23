@@ -1,4 +1,4 @@
-import db from "@/utils/database"
+import Database from "@/utils/database"
 
 export type Character = {
     name: string,
@@ -25,6 +25,7 @@ export const POST = async (req : Request) => {
     console.log(charData);
 
     try {
+        const db = Database.getInstance();
         await db.tx(async (t) => {
             const user = await t.oneOrNone('SELECT id FROM "users" WHERE email = $1', [email]);
             
