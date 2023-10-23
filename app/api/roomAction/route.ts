@@ -1,12 +1,14 @@
 import Database from "@/utils/database"
 
 export const POST = async (req : Request) => {
-    const { room_id, user_id, role, status} = await req.json();
+    const { room_id, email, role, status} = await req.json();
 
     try {
         const db = Database.getInstance();
-        const joinQuery = `INSERT INTO rooms (room_id, role, user_id, status, time) VALUE ($1, $2, $3, $4, NOW())`;
-        await db.none(joinQuery, [room_id, role, user_id, status]);
+        const joinQuery = `
+        INSERT INTO rooms (room_id, role, user_id, status, time) 
+        VALUE ($1, $2, (SELECT user_id FROM users where email = $2), $4, NOW())`;
+        await db.none(joinQuery, [room_id, role, email, status]);
 
         console.log(`${status} room successfully.`);
         return new Response(`${status} room successfully.`, { status: 200 });
