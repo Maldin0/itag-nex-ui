@@ -37,11 +37,11 @@ export default function Mycharacter({ }: Props) {
   const [isinvenOpen, setinvenOpen] = useState(false);
   const [isdeleteOpen, setdeleteOpen] = useState(false);
 
-  const handleSwitchChange = (charId: number) => {
+  const handleSwitchChange = async (charId: number) => {
     setCharacters(prevChars => {
       const isCurrentlyActive = prevChars.find(char => char.char_id === charId)?.is_active;
       const hasOtherActive = prevChars.some(char => char.char_id !== charId && char.is_active);
-
+      
       return prevChars.map(char => {
         if (char.char_id === charId) {
           if (isCurrentlyActive && !hasOtherActive) {
@@ -53,6 +53,17 @@ export default function Mycharacter({ }: Props) {
         }
       });
     });
+    try {
+      const response = await fetch("/api/setActive", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ char_id: String(charId),email: String(session?.user?.email)})
+      });
+    } catch (error) {
+      console.error("Failed to fetch setActive:", error);
+    }
   };
 
   async function getCharData(char_id: string | number) {

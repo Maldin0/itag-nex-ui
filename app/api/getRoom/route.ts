@@ -4,7 +4,8 @@ type User = {
     name: string,
     char_id: number,
     image: string,
-    role: string
+    role: string,
+    class: string
 }
 
 export type RoomData = {

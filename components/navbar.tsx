@@ -29,6 +29,7 @@ export const Navbar = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
   const pathname = usePathname();
   const disabledKeys = pathname === "/mycharacter" ? ["mycharacter"] : [];
+  
 
 
   async function handleLogout() {
