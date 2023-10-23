@@ -22,10 +22,24 @@ export const POST = async (req : Request) => {
 
     try {
         const db = Database.getInstance();
-        const query = `SELECT characters.name, characters.char_id, image, rooms.role 
-        from users join characters on users.id = characters.user_id 
-        join rooms on users.id = rooms.user_id 
-        WHERE rooms.room_id = $1 AND characters.char_id = true ORDER BY rooms.id ASC`;
+        const query = `
+        WITH RankedStatuses AS (
+            SELECT r.user_id,
+                r.status,
+                r.room_id,
+                r.role,
+                r.time,
+                ROW_NUMBER() OVER (PARTITION BY r.user_id ORDER BY r.time DESC, r.id DESC) as rn
+            FROM rooms r
+            WHERE r.room_id = $1
+        )
+
+        SELECT c.name, c.char_id, u.image, r.role
+        FROM users u
+        JOIN characters c ON u.id = c.user_id 
+        JOIN RankedStatuses r ON u.id = r.user_id 
+        WHERE r.rn = 1 AND r.status = 'join' AND c.is_active = true
+        ORDER BY u.id ASC;`;
         const users = await db.any(query, [room_id]);
         roomData.users = users;
 
