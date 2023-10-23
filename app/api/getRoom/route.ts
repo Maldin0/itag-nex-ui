@@ -34,7 +34,6 @@ export const POST = async (req : Request) => {
             FROM rooms r
             WHERE r.room_id = $1
         )
-
         SELECT c.name, c.char_id, u.image, r.role
         FROM users u
         JOIN characters c ON u.id = c.user_id 
