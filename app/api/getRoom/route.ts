@@ -4,7 +4,8 @@ type User = {
     name: string,
     char_id: number,
     image: string,
-    role: string
+    role: string,
+    class: string
 }
 
 export type RoomData = {
@@ -22,10 +23,11 @@ export const POST = async (req : Request) => {
 
     try {
         const db = Database.getInstance();
-        const query = `SELECT characters.name, characters.char_id, image, rooms.role 
+        const query = `SELECT characters.name, characters.char_id, image, rooms.role, classes.class_name as class
         from users join characters on users.id = characters.user_id 
         join rooms on users.id = rooms.user_id 
-        WHERE rooms.room_id = $1 AND characters.char_id = true ORDER BY rooms.id ASC`;
+        join classes on characters.class_id = classes.class_id
+        WHERE rooms.room_id = $1 AND characters.is_active = true ORDER BY rooms.id ASC`;
         const users = await db.any(query, [room_id]);
         roomData.users = users;
 
