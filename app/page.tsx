@@ -1,14 +1,63 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Button } from "@nextui-org/button";
-import { Image } from "@nextui-org/react";
 import { options } from "./api/auth/[...nextauth]/options"
 import "@/styles/globals.css";
+import {
+  Card, CardHeader, CardBody, CardFooter, Divider, Link, Image, Textarea, Input, Button, Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter, useDisclosure, Accordion, AccordionItem
+} from "@nextui-org/react";
+import Swal from "sweetalert2";
+import {useRouter} from "next/navigation"
 
 
 export default function Home() {
+  const router = useRouter();
   const { data: session } = useSession();
+  const [roomId, setRoomId] = useState<number>(0);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalRole, setModalRole] = useState('player');
+
+  const [join, setJoin] = useState<string>("");
+
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const value = e.target.value;
+    if (isNaN(Number(value))) {
+      e.preventDefault();
+      return;
+    }
+  }
+
+  async function joinRoom(role: string) {
+
+    try {
+      const response = await fetch("/api/roomAction", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ room_id: roomId, email: session?.user?.email, role: role, status: 'join' })
+      });
+
+    } catch (error) {
+      console.error("Failed to fetch charData:", error);
+    }
+  }
+
+  const handleOpen = (role: string) => {
+    setModalRole(role);
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
 
   return (
     <div className="contents">
@@ -23,12 +72,39 @@ export default function Home() {
               <div className="text-4xl font" style={{ color: 'white', textShadow: '4px 4px 2px rgba(0, 0, 0, 1)' }}>
                 PLAY AS
               </div>
-              <Button radius="md" size="lg" color="success" variant="solid">
-                DUNGEON MASTER
+              <Button radius="md" size="lg" color="success" variant="solid" onPress={() => {
+                handleOpen('dungeonMaster') 
+                
+              }}>
+                DUNGEON MASTER 
               </Button>
-              <Button radius="md" size="lg" color="success" variant="solid">
-                PLAYER
-              </Button>
+
+              <Button radius="md" size="lg" color="success" variant="solid" onPress={() => {
+                handleOpen('p')
+              }}>Player</Button>
+              <Modal isOpen={isOpen} onClose={handleClose}>
+                <ModalContent>
+
+                  <ModalHeader className="flex flex-col gap-1">Join Room</ModalHeader>
+                  <ModalBody>
+                    <p>
+                      <Input type="number" onChange={(e) => setRoomId(Number(e.target.value))}></Input>
+                    </p>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button color="danger" variant="light" onPress={handleClose}>
+                      Close
+                    </Button>
+                    <Button color="success" onClick={() => {
+                      joinRoom(modalRole === 'dungeonMaster' ? 'd' : 'p');
+                      router.push(`/room/${roomId}`)
+                    }}>
+                      Join
+                    </Button>
+                  </ModalFooter>
+
+                </ModalContent>
+              </Modal>
             </div>
           </div>
 

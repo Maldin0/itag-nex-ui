@@ -11,22 +11,36 @@ import {
 import roomStyle from "./roomStyle.module.css";
 import Dice from "../../../components/dice";
 import Sent from "../../../components/Sent";
+import Exit from "../../../components/exit";
 
 import { CharData } from "../../api/charData/route";
 import { Char } from "../../api/userData/route";
+import Swal from 'sweetalert2';
+import { useRouter } from "next/navigation"
 
 type Props = {
   params: any;
 }
-
+type ChatItem = {
+  name: string;
+  action: string;
+  time: string;
+}
 export default function session({ params }: Props) {
 
+  const router = useRouter();
+  const [roomAction, setRoomAction] = useState<string[]>([]);
   const [roomData, setRoomData] = useState<RoomData | null>(null);
   const [selectedChardata, setSelectedChardata] = useState<CharData | null>(null);
   const [selectedUser, setSelectedUser] = useState<any | null>(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+  const [chatContent, setChatContent] = useState("");
+
+
+
   async function getCharData(char_id: string | number) {
+    
 
     try {
       const response = await fetch("/api/charData", {
@@ -62,6 +76,70 @@ export default function session({ params }: Props) {
         console.error("Failed to fetch room data:", err);
       });
   }, [params.id]);
+
+
+  async function getChat() {
+    fetch('/api/getAction', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ room_id: params.id })
+    })
+      .then(res => res.json())
+      .then(data => {
+        const transformedData = data.map((item: ChatItem) => `${item.name}: ${item.action} - ${item.time}`);
+        setRoomAction(transformedData);
+        console.log(data);
+      })
+      .catch(err => {
+        console.error("Failed to fetch room data:", err);
+      });
+
+  }
+
+  useEffect(() => {
+    getChat();
+    if (roomAction) {
+      const formattedChat = roomAction.join('\n');
+      setChatContent(formattedChat);
+    }
+    
+  }, [])
+
+  useEffect(() => {
+    console.log(chatContent)
+
+  }, [chatContent])
+
+  useEffect(() => {
+    console.log(roomAction)
+
+  }, [roomAction])
+  
+
+  async function exitRoom() {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Are you sure ?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        router.push('/')
+      }
+    })
+  }
+
+  
+  const clearChat = () => {
+    setChatContent("");
+  };
+
+  const [inputText, setInputText] = useState("");
+
 
   return (
     <>
@@ -235,16 +313,32 @@ export default function session({ params }: Props) {
         textAlign: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column',
       }}>
         <br />
-        <div style={{ alignSelf: 'flex-end' }}>
-          <Button color='danger' variant='faded'>Clear chat</Button>
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+          <Button style={{ alignSelf: 'flex-start' }} color='danger' size='md' onPress={() => {
+            exitRoom();
+          }}>
+            <Exit />
+          </Button>
+
+          <Button style={{ alignSelf: 'flex-end' }} color='danger' variant='faded' size='md' onPress={() => {
+            clearChat();
+          }}>
+            Clear chat
+          </Button>
         </div>
         <br />
+        <div>
+
+        </div>
         <Textarea
           label={`Room ${params.id}`}
           placeholder="Chat World"
           size='lg'
           maxRows={7}
           readOnly
+          value={chatContent} // Bind the value of the Textarea to chatContent
+          onChange={e => setChatContent(e.target.value)}
+
         />
         <div className='flex flex-row gap-5 items-center'>
           <Input
@@ -252,9 +346,14 @@ export default function session({ params }: Props) {
             placeholder="Chat"
             size='lg'
             className='w-96'
+            value={inputText}
+            onChange={e => setInputText(e.target.value)}
           />
           <div>
-            <Button size="md" color='warning' variant='shadow'><Sent /></Button>
+            <Button size="md" color='warning' variant='shadow' onPress={() => {
+              setChatContent(prevChatContent => `${prevChatContent}\n${inputText}`);
+              setInputText("");
+            }}><Sent /></Button>
           </div>
           <div>
             <Button size="md" color='default'><Dice /></Button>
