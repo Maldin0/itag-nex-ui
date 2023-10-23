@@ -20,7 +20,6 @@ import { Link } from "@nextui-org/link";
 import {Avatar} from "@nextui-org/react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
-import Swal from "sweetalert2";
 
 import React from "react";
 export const Navbar = () => {

@@ -1,16 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { options } from "./api/auth/[...nextauth]/options"
+import { signIn, useSession} from "next-auth/react";
 import "@/styles/globals.css";
 import {
-  Card, CardHeader, CardBody, CardFooter, Divider, Link, Image, Textarea, Input, Button, Modal,
+ Image, Input, Button, Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter, useDisclosure, Accordion, AccordionItem
+  ModalFooter
 } from "@nextui-org/react";
-import Swal from "sweetalert2";
 import {useRouter} from "next/navigation"
 
 
@@ -22,21 +20,10 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const [modalRole, setModalRole] = useState('player');
 
-  const [join, setJoin] = useState<string>("");
-
-
-  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
-    if (isNaN(Number(value))) {
-      e.preventDefault();
-      return;
-    }
-  }
-
   async function joinRoom(role: string) {
 
     try {
-      const response = await fetch("/api/roomAction", {
+      await fetch("/api/roomAction", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -125,7 +112,7 @@ export default function Home() {
               </div>
 
               <div className="flex-1 text-center pt-24">
-                <Button size="lg" radius="md" color="success" variant="shadow">ROLL THE DICE</Button>
+                <Button size="lg" radius="md" color="success" variant="shadow" onPress={async ()=>{await signIn("google", {callbackUrl: '/'});}}>ROLL THE DICE</Button>
               </div>
             </div>
 
