@@ -1,6 +1,6 @@
 export default function SesLayout({
-                                          children,
-                                      }: {
+    children,
+}: {
     children: React.ReactNode;
 }) {
     return (
