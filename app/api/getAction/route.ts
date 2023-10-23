@@ -6,10 +6,10 @@ export const POST = async (req : Request) => {
     try {
         const db = Database.getInstance();
         const query = `
-        SELECT characters.name, actions.action, actions.time  FROM actions 
+        SELECT characters.name, actions.action, actions.time::TIME  FROM actions 
         join characters 
         on actions.char_id = characters.char_id
-        WHERE room_id = 1 AND characters.is_active = true ORDER BY time ASC`;
+        WHERE room_id = $1 AND characters.is_active = true ORDER BY time ASC`;
 
         const actions = await db.manyOrNone(query, [room_id]);
         

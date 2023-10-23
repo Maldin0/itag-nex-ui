@@ -137,7 +137,6 @@ export default function Mycharacter({ }: Props) {
   return (
     <div
       className={`${profileStyle.box} container flex flex-col justify-center mx-auto `}
-
     >
 
       <div className={`${profileStyle.box2} container flex flex-col items-stretch justify-center mx-auto my-10 `}>

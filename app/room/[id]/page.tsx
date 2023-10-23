@@ -1,8 +1,8 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import { RoomData } from '../../api/getRoom/route'
 import {
-  Card, CardHeader, CardBody, CardFooter, Divider, Link, Image, Textarea, Input, Button, Modal,
+  Card, CardBody, CardFooter, Divider, Link, Image, Textarea, Input, Button, Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
@@ -17,6 +17,7 @@ import { CharData } from "../../api/charData/route";
 import { Char } from "../../api/userData/route";
 import Swal from 'sweetalert2';
 import { useRouter } from "next/navigation"
+import { useSession } from 'next-auth/react';
 
 type Props = {
   params: any;
@@ -26,15 +27,17 @@ type ChatItem = {
   action: string;
   time: string;
 }
-export default function session({ params }: Props) {
-
+export default function Room({ params }: Props) {
+  
   const router = useRouter();
+  const { data :session } = useSession();
+  const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [roomAction, setRoomAction] = useState<string[]>([]);
   const [roomData, setRoomData] = useState<RoomData | null>(null);
   const [selectedChardata, setSelectedChardata] = useState<CharData | null>(null);
   const [selectedUser, setSelectedUser] = useState<any | null>(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
+  const [inputText, setInputText] = useState("");
   const [chatContent, setChatContent] = useState("");
 
 
@@ -59,9 +62,8 @@ export default function session({ params }: Props) {
     }
   }
 
-  useEffect(() => {
-    // Fetch RoomData from the API
-    fetch('/api/getRoom', {
+  async function getRoomData() {
+    await fetch('/api/getRoom', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -75,37 +77,83 @@ export default function session({ params }: Props) {
       .catch(err => {
         console.error("Failed to fetch room data:", err);
       });
+  }
+
+  useEffect(() => {
+    getRoomData();
   }, [params.id]);
 
 
   async function getChat() {
-    fetch('/api/getAction', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ room_id: params.id })
-    })
-      .then(res => res.json())
-      .then(data => {
-        const transformedData = data.map((item: ChatItem) => `${item.name}: ${item.action} - ${item.time}`);
-        setRoomAction(transformedData);
-        console.log(data);
+    try {
+      const response = await fetch('/api/getAction', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ room_id: params.id })
       })
-      .catch(err => {
-        console.error("Failed to fetch room data:", err);
-      });
+      const data = await response.json();
+      const transformedData = data.map((item: ChatItem) => `${item.name}: ${item.action} - ${item.time}`);
+      setRoomAction(transformedData);
+    } catch (error) {
+      console.error("Failed to fetch room data:", error);
+    }
+  }
 
+  async function handleSent(text: string) {
+    try {
+      const response = await fetch('/api/sentAction', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          room_id: params.id, 
+          email: session?.user?.email,
+          action: text })
+      })
+    } catch (error) {
+      console.error("Failed to fetch room data:", error);
+    }
   }
 
   useEffect(() => {
     getChat();
-    if (roomAction) {
-      const formattedChat = roomAction.join('\n');
-      setChatContent(formattedChat);
-    }
-    
+    getRoomData();
+    setLastUpdate(Date.now());
+
   }, [])
+
+  useEffect(() => {
+    let pollingTimer: NodeJS.Timeout;
+
+    const pollChat = () => {
+      getChat();
+      getRoomData();
+
+      // Check time since last activity
+      const timeSinceLastActivity = Date.now() - lastUpdate;
+
+      let pollingFrequency;
+      if (timeSinceLastActivity < 5 * 60 * 1000) { // Less than 5 minutes
+        pollingFrequency = 1000; // Poll every second
+      } else if (timeSinceLastActivity < 10 * 60 * 1000) { // Less than 10 minutes
+        pollingFrequency = 5000; // Poll every 5 seconds
+      } else {
+        pollingFrequency = 30000; // Poll every 30 seconds
+      }
+
+      pollingTimer = setTimeout(pollChat, pollingFrequency);
+    };
+
+    pollChat();
+
+    // Cleanup the polling on unmount
+    return () => clearTimeout(pollingTimer);
+  }, [lastUpdate]);
+
+
 
   useEffect(() => {
     console.log(chatContent)
@@ -114,7 +162,8 @@ export default function session({ params }: Props) {
 
   useEffect(() => {
     console.log(roomAction)
-
+    const formattedChat = roomAction.join('\n');
+    setChatContent(formattedChat);
   }, [roomAction])
   
 
@@ -125,20 +174,40 @@ export default function session({ params }: Props) {
       showCancelButton: true,
       confirmButtonText: 'Yes',
       denyButtonText: `No`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
+    }).then(async (result) => {
       if (result.isConfirmed) {
+        await fetch('/api/roomAction', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ room_id: params.id, email: session?.user?.email, role:'l', status: 'leave' })
+        })
         router.push('/')
       }
     })
   }
 
   
-  const clearChat = () => {
+  const clearChat = async () => {
     setChatContent("");
+    const response = await fetch('/api/clearAction', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ room_id: params.id })
+    })
+    if (response.status === 200) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Clear chat success',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
   };
 
-  const [inputText, setInputText] = useState("");
 
 
   return (
@@ -328,7 +397,6 @@ export default function session({ params }: Props) {
         </div>
         <br />
         <div>
-
         </div>
         <Textarea
           label={`Room ${params.id}`}
@@ -350,16 +418,20 @@ export default function session({ params }: Props) {
             onChange={e => setInputText(e.target.value)}
           />
           <div>
-            <Button size="md" color='warning' variant='shadow' onPress={() => {
-              setChatContent(prevChatContent => `${prevChatContent}\n${inputText}`);
-              setInputText("");
-            }}><Sent /></Button>
+            <Button size="md" color='warning' variant='shadow' onPress={async () => {
+              
+              await handleSent(inputText)
+              setInputText("")
+            }}
+            ><Sent /></Button>
           </div>
           <div>
-            <Button size="md" color='default'><Dice /></Button>
+            <Button size="md" color='default' onPress={async () => {
+              const rand = Math.floor(Math.random() * 20) + 1
+              await handleSent(`Rolled NAT: ${rand}`)
+            }}><Dice /></Button>
           </div>
         </div>
-
       </div>
       <div className=' text-center'>ดีคับ</div>
     </>

@@ -6,8 +6,14 @@ export const POST = async (req : Request) => {
     try {
         const db = Database.getInstance();
         const query = `
-        INSERT INTO actions (room_id, user_id, action, time) 
-        VALUES ($1, (SELECT id FROM users WHERE email = $2), $3, NOW());`;
+        INSERT INTO actions (room_id, char_id, action, time) 
+        VALUES ($1, (
+            SELECT char_id FROM characters 
+            JOIN users 
+            ON characters.user_id = users.id
+            WHERE email = $2
+            AND is_active = true
+            ), $3, NOW());`;
 
         await db.none(query, [room_id, email, action]);
         console.log('Action sent successfully.');
