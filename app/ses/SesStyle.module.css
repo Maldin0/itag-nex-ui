@@ -17,11 +17,10 @@
     font-size: 2rem;
 }
 
-.underline h1{
-    border-bottom: 0.1px solid rgb(0, 0, 0);
-    display: inline-block; /* ทำให้ h1 มีขนาดตามข้อความ */
-    margin: 0 auto; /* สำหรับจัดกลางตัวอักษร */
-    /* ระบุคุณสมบัติอื่น ๆ ที่คุณต้องการ */
+.underline{
+    text-decoration: underline;
+   
+ 
   }
 
   .line {
@@ -30,6 +29,15 @@
     height: 0.1em;
     border-radius: 1em;
     background-color: rgb(163, 84, 27);
+  }
+
+  .line2 {
+    position: relative;
+    
+    width: 100%;
+    height: 0.01em;
+    border-radius: 1em;
+    background-color: rgba(119, 64, 1, 0.973);
   }
 
 /*.GridCon {*/

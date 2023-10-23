@@ -16,9 +16,26 @@ export default function Ses({ }: Props) {
             playerName: 'Player1'
         },
         {
-            masterCheckbox: true,
+            masterCheckbox: false,
             playerName: 'Player2'
         },
+        {
+            masterCheckbox: false,
+            playerName: 'Player3'
+        },
+        {
+            masterCheckbox: false,
+            playerName: 'Player4'
+        },
+        {
+            masterCheckbox: false,
+            playerName: 'Player5'
+        },
+        {
+            masterCheckbox: false,
+            playerName: 'Player6'
+        },
+        
         //... คุณสามารถเพิ่มเซสชันเพิ่มเติมตามต้องการ
     ];
 
@@ -33,11 +50,12 @@ export default function Ses({ }: Props) {
 
                 <div className={SesStyle.box2}>
                     <div className="container flex flex-row mx-auto ">
-                        <div className="flex-1 text-left ">
-                            <h1>DG Master</h1>
+                        <div className="flex-1 pl-56">
+                            <h1>DG_Master</h1>
+                            <div className={SesStyle.line}></div>
                             {sessions.map((session, index) => (
                                 <React.Fragment key={index}>
-                                    <h1>
+                                    <h1 className="">
                                         <Checkbox defaultSelected={session.masterCheckbox} isDisabled={!session.masterCheckbox} size="lg" color="warning" onClick={(e) => {
                                             if (session.masterCheckbox) {
                                                 e.preventDefault();
@@ -45,17 +63,20 @@ export default function Ses({ }: Props) {
                                         }}
                                         />
                                     </h1>
-
+                                    <div className={SesStyle.line2} ></div>
                                 </React.Fragment>
                             ))}
+
                         </div>
-                        <div className="flex-1 text-center">
+                        <div className="flex-1 text-center pr-56">
                             <h1>Players</h1>
+                            <div className={SesStyle.line}></div>
                             {sessions.map((session, index) => (
                                 <React.Fragment key={index}>
-                                    <div className={SesStyle.underline}>
-                                        <h1>{session.playerName}</h1>
-                                    </div>
+
+                                    <h1 className={SesStyle.underline}>{session.playerName}</h1>
+
+                                    <div className={SesStyle.line2} ></div>
                                 </React.Fragment>
                             ))}
                         </div>
