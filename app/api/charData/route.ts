@@ -1,4 +1,4 @@
-import db from "@/utils/database"
+import Database from "@/utils/database";
 
 type Feature = {
     name: string,
@@ -75,6 +75,7 @@ export const POST = async (req : Request) => {
     }
 
     try {
+        const db = Database.getInstance();
         await db.tx(async (t) => {
             const raceQuery = 'SELECT race_name FROM characters natural join races where char_id = $1';
             const raceData = await t.one(raceQuery, [char_id]);

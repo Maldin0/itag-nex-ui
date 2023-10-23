@@ -1,4 +1,4 @@
-import db from "@/utils/database"
+import Database from "@/utils/database"
 
 export const POST = async (req : Request) => {
     const { char_id } = await req.json()
@@ -8,6 +8,7 @@ export const POST = async (req : Request) => {
     }
 
     try {
+        const db = Database.getInstance();
         await db.tx(async (t) => {
             await t.none('DELETE FROM inventories WHERE char_id = $1', [char_id]);
             await t.none('DELETE FROM skills_in_char WHERE char_id = $1', [char_id]);
