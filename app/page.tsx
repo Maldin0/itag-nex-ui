@@ -33,9 +33,26 @@ export default function Home() {
           <br /><br /><br />
         </>
       ) : (
-        <div className="text-center" style={{ height: "600px", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Button size="md" radius="md" color="success" variant="shadow">Roll The Dice</Button>
-        </div>
+        <>
+          <div className="text-between font mb-10" style={{ height: "600px", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className={`container flex flex-row mx-auto `}>
+              <div className="flex-1 text-center text-8xl" style={{color: 'white', textShadow: '7px 7px 4px rgba(0, 0, 0, 1)' }}>
+                <h1>IT
+                  <br />
+                  ADVENTURER
+                  <br />
+                  GUILD</h1>
+                <h1></h1>
+              </div>
+
+              <div className="flex-1 text-center pt-24">
+                <Button size="lg" radius="md" color="success" variant="shadow">ROLL THE DICE</Button>
+              </div>
+            </div>
+
+          </div>
+
+        </>
       )}
       <br />
       <div className="select-none"

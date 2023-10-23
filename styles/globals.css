@@ -28,3 +28,8 @@
     height:100%;
     width:100%;
 }
+
+.stroke-2 {
+    -webkit-text-stroke: 2px black; /* for Safari and Chrome */
+    
+}
